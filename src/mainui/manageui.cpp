@@ -52,7 +52,7 @@ void RuningThread::run()
 {
     while (true) {
         if(!GetProcessidFromName()) {
-            emit startDplatform();
+            emit startDplatformos();
         } else {
             m_mutexFinish.lock();
             if(!m_bFinish) {
@@ -84,21 +84,21 @@ ManageUI::ManageUI(QWidget *parent, const char* lpstylesheet)
     : JsonConnectorMainWindow(parent)
     , ui(new Ui::ManageUI)
     , m_bFirst(true)
-    , m_nCloseDplatform (0)
-    , m_dwDplatformProcessId (-1)
+    , m_nCloseDplatformos (0)
+    , m_dwDplatformosProcessId (-1)
 #ifdef WIN32
     , m_clearThread(NULL)
 #endif
 {
     g_lpManageUI = this;
     m_lpQProcess = new QProcess(this);
-    startDplatform();
+    startDplatformos();
 
     m_lpThread = new RuningThread();
     connect(m_lpThread, SIGNAL(PostMsgGetWalletstatus()), this, SLOT(PostMsgGetWalletstatus()));
     connect(m_lpThread, SIGNAL(PostMsgGetCoinSymbol()), this, SLOT(PostMsgGetCoinSymbol()));
     connect(m_lpThread, SIGNAL(PostMsgGetProperFee()), this, SLOT(PostMsgGetProperFee()));
-    connect(m_lpThread, SIGNAL(startDplatform()), this, SLOT(startDplatform()));
+    connect(m_lpThread, SIGNAL(startDplatformos()), this, SLOT(startDplatformos()));
 #ifdef WIN32
     m_clearThread = new ClearThread();
 #endif
@@ -156,6 +156,7 @@ void ManageUI::requestFinished(const QVariant &result, const QString &/*error*/)
         }
         else
         {
+            qInfo() << ("show seed ui");
             SeedUi* lpSeedUI = new SeedUi();
             lpSeedUI->setStyleSheet(m_stylesheet);
             lpSeedUI->show();
@@ -217,7 +218,7 @@ void ManageUI::requestFinished(const QVariant &result, const QString &/*error*/)
 
 void ManageUI::StartThread()
 {
-    m_nCloseDplatform = 0;
+    m_nCloseDplatformos = 0;
 #ifdef WIN32
     m_lpThread->SetQuit(false);
 #endif
@@ -237,9 +238,9 @@ void ManageUI::QuitThread()
 #endif
 }
 
-void ManageUI::CloseQueueDplatform()
+void ManageUI::CloseQueueDplatformos()
 {
-    QString strCli = CStyleConfig::GetInstance().GetDplatformcliPath();
+    QString strCli = CStyleConfig::GetInstance().GetDplatformoscliPath();
     QStringList strList;
     strList << "close";
 
@@ -309,10 +310,10 @@ void ManageUI::PostMsgGetProperFee()
     }
 }
 
-void ManageUI::startDplatform()
+void ManageUI::startDplatformos()
 {
-    QString strPath = CStyleConfig::GetInstance().GetDplatformPath();
-    QString strPathError = GetDefaultDataDir() + "/logs/dplatform_error.log";
+    QString strPath = CStyleConfig::GetInstance().GetDplatformosPath();
+    QString strPathError = GetDefaultDataDir() + "/logs/dplatformos_error.log";
 
     QString strWalletDatadir;
 #ifdef WIN32
@@ -374,20 +375,20 @@ void ManageUI::startDplatform()
         strPath = strPath + " -waitpid=true";
     }
 
-    qDebug() << ("创建 dplatform： ") << strPath.toStdString().c_str();
+    qDebug() << ("创建 dplatformos： ") << strPath.toStdString().c_str();
     if(CreateProcess(NULL, (LPWSTR)strPath.toStdWString().c_str(),  NULL, NULL, true, 0, NULL, NULL, &si, &pi))
     {
         WaitForSingleObject(pi.hProcess, 1);
 
-        m_dwDplatformProcessId = pi.dwProcessId;
+        m_dwDplatformosProcessId = pi.dwProcessId;
         //下面两行关闭句柄，解除本进程和新进程的关系，不然有可能不小心调用TerminateProcess函数关掉子进程
         CloseHandle(pi.hProcess);
         CloseHandle(pi.hThread);
-        qDebug() << ("创建 dplatform 进程成功， PID=") << (QString::number((int)m_dwDplatformProcessId, 10).toStdString().c_str());
+        qDebug() << ("创建 dplatformos 进程成功， PID=") << (QString::number((int)m_dwDplatformosProcessId, 10).toStdString().c_str());
     }
     else
     {
-        qCritical() << ("创建 dplatform 进程失败") << strPathError.toStdWString().c_str();
+        qCritical() << ("创建 dplatformos 进程失败") << strPathError.toStdWString().c_str();
     }
 
     CloseHandle(hReadFile);
@@ -407,34 +408,34 @@ void ManageUI::startDplatform()
          strList << " -waitpid=true";
     }
     m_lpQProcess->start(strPath, strList);
-    m_dwDplatformProcessId = m_lpQProcess->pid();
+    m_dwDplatformosProcessId = m_lpQProcess->pid();
 #endif
 }
 
-void ManageUI::CloseDplatformTemp()
+void ManageUI::CloseDplatformosTemp()
 {
-    qDebug() << ("退出 Dplatform");
+    qDebug() << ("退出 Dplatformos");
 
     QuitThread();
 
-    CloseQueueDplatform();
+    CloseQueueDplatformos();
 
     if (g_lpMainUI) {
-        g_lpMainUI->StopCommunicateDplatformThread();
+        g_lpMainUI->StopCommunicateDplatformosThread();
     }
 }
 
-void ManageUI::CloseDplatform()
+void ManageUI::CloseDplatformos()
 {
 #ifndef WIN32
-    m_dwDplatformProcessId = m_lpQProcess->pid();
+    m_dwDplatformosProcessId = m_lpQProcess->pid();
 #endif
 
 #ifdef QT_DEBUG
     return;
 #endif
 
-    CloseDplatformTemp();
+    CloseDplatformosTemp();
 
     if(GetProcessidFromName())
     {

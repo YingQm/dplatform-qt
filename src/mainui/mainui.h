@@ -40,8 +40,8 @@ public:
     explicit MainUI(QString &stylesheet, QWidget *parent = 0);
     ~MainUI();
 
-    void StopCommunicateDplatformThread();
-    void ResumeCommunicateDplatformThread();
+    void StopCommunicateDplatformosThread();
+    void ResumeCommunicateDplatformosThread();
 private:
     void initUI();
 

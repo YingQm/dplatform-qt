@@ -9,17 +9,17 @@
 CStyleConfig* CStyleConfig::s_lpStyleConfig = nullptr;
 
 CStyleConfig::CStyleConfig()
-: m_strDplatformName ("dplatform")
-, m_strAppName ("dplatform-qt")
-, m_strAppName_en ("dplatform-qt")
-, m_strAppName_zh ("dplatform-qt")
+: m_strDplatformosName ("dplatformos")
+, m_strAppName ("dplatformos-qt")
+, m_strAppName_en ("dplatformos-qt")
+, m_strAppName_zh ("dplatformos-qt")
 , m_strUnitName ("")
 , m_dMinFee (0.0)
-, m_strNetworkUrl ("http://localhost:8801/")
+, m_strNetworkUrl ("http://localhost:28803/")
 , m_stylesheet_type ("yellow")
 {
     readConfigFile();
-    setDplatformNamePath();
+    setDplatformosNamePath();
 }
 
 void CStyleConfig::readConfigFile()
@@ -33,7 +33,7 @@ void CStyleConfig::readConfigFile()
         QSettings *lpconfigIni = new QSettings(strPath, QSettings::IniFormat);
         lpconfigIni->setIniCodec(QTextCodec::codecForName("UTF-8"));
 
-        readValue(lpconfigIni, "Config/DplatformName", m_strDplatformName);
+        readValue(lpconfigIni, "Config/DplatformosName", m_strDplatformosName);
         readValue(lpconfigIni, "Config/AppName", m_strAppName);
         readValue(lpconfigIni, "Config/AppName_zh", m_strAppName_zh);
         readValue(lpconfigIni, "Config/AppName_en", m_strAppName_en);
@@ -58,8 +58,6 @@ void CStyleConfig::readConfigFile()
     if (m_stylesheet_type == "blue") {
         m_stylesheet_main = m_stylesheet;
         m_stylesheet_child = m_stylesheet;
-//        m_stylesheet_main = "QWidget {background-color:#E7EDF1;border:none;}" + m_stylesheet;
-//        m_stylesheet_child = "QWidget {background-color:#E7EDF1;border:none;}" + m_stylesheet;
     }
 
     QString lang_territory = QString::fromStdString(QLocale::system().name().toStdString());
@@ -79,25 +77,23 @@ void CStyleConfig::readValue(QSettings *lpconfig, const QString &key, QString &r
     }
 }
 
-void CStyleConfig::setDplatformNamePath()
+void CStyleConfig::setDplatformosNamePath()
 {
-    m_strDplatformExe = m_strDplatformName;
-    m_strDplatformcliExe = m_strDplatformName + "-cli";
+    m_strDplatformosExe = m_strDplatformosName;
+    m_strDplatformoscliExe = m_strDplatformosName + "-cli";
 
 #ifdef WIN32
     if(!isWow64()) {
-        m_strDplatformExe += "-x86";
-        m_strDplatformcliExe += "-x86";
+        m_strDplatformosExe += "-x86";
+        m_strDplatformoscliExe += "-x86";
     }
-    m_strDplatformExe += ".exe";
-    m_strDplatformcliExe += ".exe";
 #endif
 
-    m_strDplatformPath = QCoreApplication::applicationDirPath() + "/" + m_strDplatformExe;
-    m_strDplatformcliPath = QCoreApplication::applicationDirPath() + "/" + m_strDplatformcliExe;
+    m_strDplatformosPath = QCoreApplication::applicationDirPath() + "/" + m_strDplatformosExe;
+    m_strDplatformoscliPath = QCoreApplication::applicationDirPath() + "/" + m_strDplatformoscliExe;
 
-    qDebug() << "m_strDplatformName:" << m_strDplatformExe << "m_strDplatformcliName:" << m_strDplatformcliExe;
-    qDebug() << "m_strDplatformPath:" << m_strDplatformPath << "m_strDplatformcliPath:" << m_strDplatformcliPath;
+    qDebug() << "m_strDplatformosName:" << m_strDplatformosExe << "m_strDplatformoscliName:" << m_strDplatformoscliExe;
+    qDebug() << "m_strDplatformosPath:" << m_strDplatformosPath << "m_strDplatformoscliPath:" << m_strDplatformoscliPath;
 }
 
 #ifdef WIN32
@@ -127,12 +123,4 @@ STYLE_QSS CStyleConfig::GetStyleType() const
         return QSS_BLUE;
 
     return QSS_YELLOW;
-}
-
-COINS_TYPE CStyleConfig::GetCoinsType() const
-{
-    if (m_strAppName_en == "ycc")
-        return TOKEN_YCC;
-
-    return TOKEN_BTY;
 }

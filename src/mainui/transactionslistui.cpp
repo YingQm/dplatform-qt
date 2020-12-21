@@ -141,22 +141,7 @@ void TransactionsListUI::requestFinished(const QVariant &result, const QString &
                 }
             }
 
-            // YCC 专用 现在不用了 都写在 amount 数据中
-            int nVoteCount = 0; // 参与投票的次数
-           /* if (strActionname == "miner") {
-                QList<QVariant> txLogsList = txMap["receipt"].toMap()["logs"].toList();
-                for (int j = 0; j<txLogsList.size(); ++j) {
-                    QMap<QString, QVariant> txLogMap = txLogsList[j].toMap();
-                    if (txLogMap["ty"] == "335") {
-                        QString strAddr = txLogMap["log"].toMap()["addr"].toString();
-                        if(strAddr == strFromAddr){
-                            ++nVoteCount;
-                        }
-                    }
-                }
-            }*/
-
-            model->AdddateEntry(TransactionsListEntry(nTime, strToAddr, strFromAddr, strTxHash, dAmount, nFee, strExecer, strActionname, nTy, strNote, strError, nVoteCount));
+            model->AdddateEntry(TransactionsListEntry(nTime, strToAddr, strFromAddr, strTxHash, dAmount, nFee, strExecer, strActionname, nTy, strNote, strError));
 
             if(i == 0)
                 strFromFirst = QString().sprintf("%013d", txMap["height"].toInt()) + QString().sprintf("%05d", txMap["index"].toInt());

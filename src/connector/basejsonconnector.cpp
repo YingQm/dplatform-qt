@@ -13,64 +13,59 @@ extern MainUI*              g_lpMainUI;
 
 void InitMethodMap()
 {
-    g_methodMap.insert(ID_Lock, "Dplatform.Lock");
-    g_methodMap.insert(ID_UnLock, "Dplatform.UnLock");
-    g_methodMap.insert(ID_SetPasswd, "Dplatform.SetPasswd");
-    g_methodMap.insert(ID_SetLabl, "Dplatform.SetLabl");
-    g_methodMap.insert(ID_NewAccount, "Dplatform.NewAccount");
-    g_methodMap.insert(ID_GetAccounts, "Dplatform.GetAccounts");
-    g_methodMap.insert(ID_GetAccounts_GetBalance, "Dplatform.GetAccounts");
-    g_methodMap.insert(ID_MergeBalance, "Dplatform.MergeBalance");
-    g_methodMap.insert(ID_SetTxFee, "Dplatform.SetTxFee");
-    g_methodMap.insert(ID_SendToAddress, "Dplatform.SendToAddress");
-    g_methodMap.insert(ID_ImportPrivKey, "Dplatform.ImportPrivkey");
-    g_methodMap.insert(ID_WalletTxList, "Dplatform.WalletTxList");
-    g_methodMap.insert(ID_GetMemPool, "Dplatform.GetMempool");
-    g_methodMap.insert(ID_SendTransaction, "Dplatform.SendTransaction");
-    g_methodMap.insert(ID_QueryTransaction, "Dplatform.QueryTransaction");
-    g_methodMap.insert(ID_GetTxByAddr, "Dplatform.GetTxByAddr");
-    g_methodMap.insert(ID_GetTxByHashes, "Dplatform.GetTxByHashes");
-    g_methodMap.insert(ID_GetBlocks, "Dplatform.GetBlocks");
-    g_methodMap.insert(ID_GetLastHeader, "Dplatform.GetLastHeader");
-    g_methodMap.insert(ID_GetPeerInfo, "Dplatform.GetPeerInfo");
-    g_methodMap.insert(ID_GetNetInfo, "Dplatform.GetNetInfo");
-    g_methodMap.insert(ID_GenSeed, "Dplatform.GenSeed");
-    g_methodMap.insert(ID_SaveSeed, "Dplatform.SaveSeed");
-    g_methodMap.insert(ID_GetSeed, "Dplatform.GetSeed");
-    g_methodMap.insert(ID_GetWalletStatus, "Dplatform.GetWalletStatus");
-    g_methodMap.insert(ID_GetBalance_coins, "Dplatform.GetBalance");
-    g_methodMap.insert(ID_GetBalance_ticket, "Dplatform.GetBalance");
-    g_methodMap.insert(ID_GetBalance_trade, "Dplatform.GetBalance");
-    if (CStyleConfig::GetInstance().GetCoinsType() == TOKEN_YCC){
-        g_methodMap.insert(ID_SetAutoMining, "pos33.SetAutoMining");
-        g_methodMap.insert(ID_GetTicketCount, "pos33.GetPos33TicketCount");
-    } else {
-        g_methodMap.insert(ID_SetAutoMining, "ticket.SetAutoMining");
-        g_methodMap.insert(ID_GetTicketCount, "ticket.GetTicketCount");
-    }
-    g_methodMap.insert(ID_GetVersion, "Dplatform.Version");
-    g_methodMap.insert(ID_IsSync, "Dplatform.IsSync");
-    g_methodMap.insert(ID_IsNtpClockSync, "Dplatform.IsNtpClockSync");
-    g_methodMap.insert(ID_Query, "Dplatform.Query");
-    g_methodMap.insert(ID_Query_GetTokens, "Dplatform.Query");
-    g_methodMap.insert(ID_Query_GetTokenSellOrderByStatus, "Dplatform.Query");
+    g_methodMap.insert(ID_Lock, "DplatformOS.Lock");
+    g_methodMap.insert(ID_UnLock, "DplatformOS.UnLock");
+    g_methodMap.insert(ID_SetPasswd, "DplatformOS.SetPasswd");
+    g_methodMap.insert(ID_SetLabl, "DplatformOS.SetLabl");
+    g_methodMap.insert(ID_NewAccount, "DplatformOS.NewAccount");
+    g_methodMap.insert(ID_GetAccounts, "DplatformOS.GetAccounts");
+    g_methodMap.insert(ID_GetAccounts_GetBalance, "DplatformOS.GetAccounts");
+    g_methodMap.insert(ID_MergeBalance, "DplatformOS.MergeBalance");
+    g_methodMap.insert(ID_SetTxFee, "DplatformOS.SetTxFee");
+    g_methodMap.insert(ID_SendToAddress, "DplatformOS.SendToAddress");
+    g_methodMap.insert(ID_ImportPrivKey, "DplatformOS.ImportPrivkey");
+    g_methodMap.insert(ID_WalletTxList, "DplatformOS.WalletTxList");
+    g_methodMap.insert(ID_GetMemPool, "DplatformOS.GetMempool");
+    g_methodMap.insert(ID_SendTransaction, "DplatformOS.SendTransaction");
+    g_methodMap.insert(ID_QueryTransaction, "DplatformOS.QueryTransaction");
+    g_methodMap.insert(ID_GetTxByAddr, "DplatformOS.GetTxByAddr");
+    g_methodMap.insert(ID_GetTxByHashes, "DplatformOS.GetTxByHashes");
+    g_methodMap.insert(ID_GetBlocks, "DplatformOS.GetBlocks");
+    g_methodMap.insert(ID_GetLastHeader, "DplatformOS.GetLastHeader");
+    g_methodMap.insert(ID_GetPeerInfo, "DplatformOS.GetPeerInfo");
+    g_methodMap.insert(ID_GetNetInfo, "DplatformOS.GetNetInfo");
+    g_methodMap.insert(ID_GenSeed, "DplatformOS.GenSeed");
+    g_methodMap.insert(ID_SaveSeed, "DplatformOS.SaveSeed");
+    g_methodMap.insert(ID_GetSeed, "DplatformOS.GetSeed");
+    g_methodMap.insert(ID_GetWalletStatus, "DplatformOS.GetWalletStatus");
+    g_methodMap.insert(ID_GetBalance_coins, "DplatformOS.GetBalance");
+    g_methodMap.insert(ID_GetBalance_ticket, "DplatformOS.GetBalance");
+    g_methodMap.insert(ID_GetBalance_trade, "DplatformOS.GetBalance");
+    g_methodMap.insert(ID_SetAutoMining, "ticket.SetAutoMining");
+    g_methodMap.insert(ID_GetTicketCount, "ticket.GetTicketCount");
+    g_methodMap.insert(ID_GetVersion, "DplatformOS.Version");
+    g_methodMap.insert(ID_IsSync, "DplatformOS.IsSync");
+    g_methodMap.insert(ID_IsNtpClockSync, "DplatformOS.IsNtpClockSync");
+    g_methodMap.insert(ID_Query, "DplatformOS.Query");
+    g_methodMap.insert(ID_Query_GetTokens, "DplatformOS.Query");
+    g_methodMap.insert(ID_Query_GetTokenSellOrderByStatus, "DplatformOS.Query");
     g_methodMap.insert(ID_CreateRawTradeSellTx, "trade.CreateRawTradeSellTx");
     g_methodMap.insert(ID_CreateRawTradeBuyTx, "trade.CreateRawTradeBuyTx");
     g_methodMap.insert(ID_CreateRawTradeRevokeTx, "trade.CreateRawTradeRevokeTx");
-    g_methodMap.insert(ID_SignRawTx, "Dplatform.SignRawTx");
-    g_methodMap.insert(ID_SignRawTx_CreateBindMiner, "Dplatform.SignRawTx");
-    g_methodMap.insert(ID_SignRawTx_CreateRawTransaction, "Dplatform.SignRawTx");
-    g_methodMap.insert(ID_GetAccountTokenAssets_token, "Dplatform.Query");
-    g_methodMap.insert(ID_GetAccountTokenAssets_trade, "Dplatform.Query");
-    g_methodMap.insert(ID_GetFatalFailure, "Dplatform.GetFatalFailure");
+    g_methodMap.insert(ID_SignRawTx, "DplatformOS.SignRawTx");
+    g_methodMap.insert(ID_SignRawTx_CreateBindMiner, "DplatformOS.SignRawTx");
+    g_methodMap.insert(ID_SignRawTx_CreateRawTransaction, "DplatformOS.SignRawTx");
+    g_methodMap.insert(ID_GetAccountTokenAssets_token, "DplatformOS.Query");
+    g_methodMap.insert(ID_GetAccountTokenAssets_trade, "DplatformOS.Query");
+    g_methodMap.insert(ID_GetFatalFailure, "DplatformOS.GetFatalFailure");
     g_methodMap.insert(ID_CreateBindMiner, "ticket.CreateBindMiner");
-    g_methodMap.insert(ID_CreateRawTransaction, "Dplatform.CreateRawTransaction");
-    g_methodMap.insert(ID_GetTimeStatus, "Dplatform.GetTimeStatus");
-    g_methodMap.insert(ID_CloseQueue, "Dplatform.CloseQueue");
-    g_methodMap.insert(ID_SendToAddress_Token, "Dplatform.SendToAddress");
-    g_methodMap.insert(ID_CreateRawTxGroup, "Dplatform.CreateRawTxGroup");
-    g_methodMap.insert(ID_GetCoinSymbol, "Dplatform.GetCoinSymbol");
-    g_methodMap.insert(ID_GetProperFee, "Dplatform.GetProperFee");
+    g_methodMap.insert(ID_CreateRawTransaction, "DplatformOS.CreateRawTransaction");
+    g_methodMap.insert(ID_GetTimeStatus, "DplatformOS.GetTimeStatus");
+    g_methodMap.insert(ID_CloseQueue, "DplatformOS.CloseQueue");
+    g_methodMap.insert(ID_SendToAddress_Token, "DplatformOS.SendToAddress");
+    g_methodMap.insert(ID_CreateRawTxGroup, "DplatformOS.CreateRawTxGroup");
+    g_methodMap.insert(ID_GetCoinSymbol, "DplatformOS.GetCoinSymbol");
+    g_methodMap.insert(ID_GetProperFee, "DplatformOS.GetProperFee");
 }
 
 BaseJsonConnector::BaseJsonConnector()
@@ -130,11 +125,6 @@ void BaseJsonConnector::PostJsonMessage(IdType id, const char* strParams)
 
 bool BaseJsonConnector::bPrintf()
 {
-    return true;
-#ifdef QT_DEBUG
-        return true;
-#endif
-
     if(m_nID == ID_SendToAddress
             || m_nID == ID_CreateRawTradeSellTx
             || m_nID == ID_CreateRawTradeBuyTx

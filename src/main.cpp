@@ -27,9 +27,9 @@ ManageUI* lpManageUI = NULL;
 #include <dbghelp.h>
 
 long ApplicationCrashHandler(EXCEPTION_POINTERS *pException) {
-    qCritical() << ("产生崩溃，退出dplatform。");
+    qCritical() << ("产生崩溃，退出dplatformos。");
 	if (lpManageUI) {
-        lpManageUI->CloseDplatform();
+        lpManageUI->CloseDplatformos();
 	}
 
     QDateTime current_date_time = QDateTime::currentDateTime();
@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
 {
     SetEnvironmentDPI();
 
-    QString appName = "dplatform-qt";
+    QString appName = "dplatformos-qt";
     QFileInfo fileInfo("./StyleConfig.ini");
     if(fileInfo.exists())
     {
@@ -155,7 +155,7 @@ int main(int argc, char *argv[])
     lpmainUI->setStyleSheet(CStyleConfig::GetInstance().GetStylesheet_main());
     lpmainUI->hide();
 
-    app.connect( &app, SIGNAL( lastWindowClosed() ), lpManageUI, SLOT( CloseDplatform() ) );
+    app.connect( &app, SIGNAL( lastWindowClosed() ), lpManageUI, SLOT( CloseDplatformos() ) );
     app.connect( &app, SIGNAL( lastWindowClosed() ), &app, SLOT( quit() ) );
 
     int result = app.exec();

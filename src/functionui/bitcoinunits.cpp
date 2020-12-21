@@ -44,9 +44,9 @@ QString BitcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case COIN: return QString("dplatform-qt");
-    case mCOIN: return QString("Milli-dplatform-qt (1 / 1,000)");
-    case uCOIN: return QString("Micro-dplatform-qt (1 / 1,000,000)");
+    case COIN: return QString("dplatformos-qt");
+    case mCOIN: return QString("Milli-dplatformos-qt (1 / 1,000)");
+    case uCOIN: return QString("Micro-dplatformos-qt (1 / 1,000,000)");
     default: return QString("???");
     }
 }

@@ -83,8 +83,6 @@ private slots:
 
     void onEditAction();
 
-    void onSetMiningAction();
-
     void contextualMenu(const QPoint &point);    
 
 public slots:

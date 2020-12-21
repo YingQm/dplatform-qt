@@ -66,7 +66,7 @@ public:
 
     bool eventFilter(QObject * watched, QEvent * event);
 
-    void RestartDplatformInit();
+    void RestartDplatformosInit();
 
     void StopUpdateStatusBar();
     void ResumeUpdateStatusBar();

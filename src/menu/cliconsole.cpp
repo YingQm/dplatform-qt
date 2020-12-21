@@ -210,7 +210,7 @@ void CliConsole::cmdRequest(const QString &command)
     if(args.empty())
         return;
 
-    QString strCli = CStyleConfig::GetInstance().GetDplatformcliPath();
+    QString strCli = CStyleConfig::GetInstance().GetDplatformoscliPath();
     QStringList strList;
 
     std::string strCommand = command.toStdString();

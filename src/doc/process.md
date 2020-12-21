@@ -3,16 +3,16 @@
 ### 获取数据目录
 - 启动前先判断是否已经存在数据目录。
 - 默认目录： 
-    + Windows < Vista: C:\Documents and Settings\Username\Application Data\dplatform-qt
-    + Windows >= Vista: C:\Users\Username\AppData\Roaming\dplatform-qt
-    + Mac: ~/Library/Application Support/dplatform-qt
-    + Unix: ~/.dplatform-qt
-- Windows 的 数据目录写入注册表： "HKEY_CURRENT_USER\\Software\\dplatform\\dplatform-qt"
+    + Windows < Vista: C:\Documents and Settings\Username\Application Data\dplatformos-qt
+    + Windows >= Vista: C:\Users\Username\AppData\Roaming\dplatformos-qt
+    + Mac: ~/Library/Application Support/dplatformos-qt
+    + Unix: ~/.dplatformos-qt
+- Windows 的 数据目录写入注册表： "HKEY_CURRENT_USER\\Software\\dplatformos\\dplatformos-qt"
 
-### 启动 dplatform
+### 启动 dplatformos
 - 参数 `-datadir` 数据目录，`-fixtime` 是否启动自动修复时间（默认不开启）。
-- 循环判断 dplatform 进程是否存在，不存在重新启动。
-- 记录 dplatform 奔溃退出信息。
+- 循环判断 dplatformos 进程是否存在，不存在重新启动。
+- 记录 dplatformos 奔溃退出信息。
 
 ### 获取seed
 - getstatus 获取钱包状态，判断是否存在 seed，不存在，显示 seed 界面，存在 seed，直接进入主界面。
@@ -52,28 +52,28 @@
     + 1LFqVvGaRpxbEWCEJVpUHAwXnh5Rt591m
     + 1DzTdTLa5JPpLdNNP2PrV1a6JCtULA7GsT 
 
-### 退出/重启 dplatform
-- 停止启动 dplatform 线程；
-- 退出 dplatform ；
-- 循环判断 dplatform 进程是否退出；
-- 启动 dplatform 线程。
+### 退出/重启 dplatformos
+- 停止启动 dplatformos 线程；
+- 退出 dplatformos ；
+- 循环判断 dplatformos 进程是否退出；
+- 启动 dplatformos 线程。
 - 用于以下三种情况：
-    + 退出整个程序，退出 dplatform；
-    + 开启或关闭自动修复时间，重启 dplatform；
-    + 修改数据目录，重启 dplatform。
+    + 退出整个程序，退出 dplatformos；
+    + 开启或关闭自动修复时间，重启 dplatformos；
+    + 修改数据目录，重启 dplatformos。
 
 ### 开启自动修复时间
 - 修改状态，保存在数据目录下 "/wallet/QtConfig.ini" 文件中。
-- 重启 dplatform 修改 `-fixtime` 这个参数。
+- 重启 dplatformos 修改 `-fixtime` 这个参数。
 
 ### 修改数据目录
 - 只有 Windows 支持这个功能，其他平台隐藏。
 - 步骤：
-    - 退出 dplatform；
+    - 退出 dplatformos；
     - 新的数据目录下，要拷贝 wallet、datadir 和 FriendsAddrList.xml 文件；
     - 旧的数据删除 datadir、logs 文件夹；
     - 修改数据目录，修改注册表；
-    - 重启 dplatform 修改 `-datadir` 这个参数。
+    - 重启 dplatformos 修改 `-datadir` 这个参数。
 
 ### 离线挖矿授权
 - 本地离线地址，绑定授权其他在线地址进行挖矿。
@@ -85,7 +85,7 @@
     - 保存成 TXT 文件，可以在区块链浏览器上发送以上两笔签名后的交易。
 
 ### 调试窗口
-- 直接调用当前目录下 dplatform-cli 程序，调用时加参数。
+- 直接调用当前目录下 dplatformos-cli 程序，调用时加参数。
 - 结果返回有多一行换行符，最好去掉。
 
 ### 隐藏地址

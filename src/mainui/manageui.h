@@ -4,7 +4,7 @@
 /*
  * 正在加载请稍等 界面
  * 管理运行 mainUI
- * 启动 dplatform
+ * 启动 dplatformos
  */
 
 #include <QMainWindow>
@@ -20,7 +20,7 @@
 #include "clearthread.h"
 #endif
 
-// 判断启动 dplatform 是否成功
+// 判断启动 dplatformos 是否成功
 class RuningThread : public QThread
 {
     Q_OBJECT
@@ -35,7 +35,7 @@ signals:
     void PostMsgGetCoinSymbol();
     void PostMsgGetProperFee();
 
-    void startDplatform();
+    void startDplatformos();
 
 protected:
     virtual void run();
@@ -67,7 +67,7 @@ public:
 
     void QuitThread();
 
-    void CloseQueueDplatform();
+    void CloseQueueDplatformos();
 
     void ShowHide();
 
@@ -80,11 +80,11 @@ public slots:
 
     void PostMsgGetProperFee();
 
-    void startDplatform();
+    void startDplatformos();
 
-    void CloseDplatformTemp();
+    void CloseDplatformosTemp();
 
-    void CloseDplatform();
+    void CloseDplatformos();
 
 private:
     Ui::ManageUI *ui;
@@ -92,11 +92,11 @@ private:
     RuningThread*   m_lpThread;
     QProcess*       m_lpQProcess;
     bool            m_bFirst;
-    int             m_nCloseDplatform;
+    int             m_nCloseDplatformos;
 #ifdef WIN32
-    DWORD           m_dwDplatformProcessId;
+    DWORD           m_dwDplatformosProcessId;
 #else
-    qint64          m_dwDplatformProcessId;
+    qint64          m_dwDplatformosProcessId;
 #endif
 #ifdef WIN32
     ClearThread*    m_clearThread;

@@ -7,7 +7,9 @@ Release
 .qmake.stash
 .vs/
 build/
-dplatform-qt-Debug_resource.rc
-dplatform-qt.vcxproj.filters
-dplatform-qt.vcxproj.user
+dplatformos-qt-Debug_resource.rc
+dplatformos-qt.vcxproj.filters
+dplatformos-qt.vcxproj.user
 debug/
+Makefile*
+object_script.*

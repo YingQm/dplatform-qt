@@ -241,14 +241,10 @@ void WalletSendUI::UpdateWalletInfo(const QList<QVariant> &walletsList)
 	if (m_bFirst) {
 		m_bFirst = false;
 		SetMaxPropertyAddr(strMaxAddr, GetbalanceD(dMaxBalance));
-	}
+    }
 
-	if (CStyleConfig::GetInstance().GetCoinsType() == TOKEN_YCC) {
-		jsonCmd.append("\"execer\":\"pos33\"}");
-	}
-	else {
-		jsonCmd.append("\"execer\":\"ticket\"}");
-	}
+    jsonCmd.append("\"execer\":\"ticket\"}");
+
 	emit SendGetTicketBalanceCmd(jsonCmd);
 }
 

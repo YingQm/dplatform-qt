@@ -17,7 +17,7 @@ public:
     ~CloseingThread(){}
 
 signals:
-    void DplatformClosed();
+    void DplatformosClosed();
 
 protected:
     virtual void run();
@@ -25,7 +25,7 @@ protected:
 
 enum CloseType{
     CloseUI = 0,
-    RestartNewDplatform
+    RestartNewDplatformos
 };
 
 namespace Ui {
@@ -43,7 +43,7 @@ public:
     virtual void requestFinished(const QVariant &result, const QString &error);
 
 public slots:
-    void DplatformClosed();
+    void DplatformosClosed();
 
 private:
     Ui::CloseingDialog *ui;

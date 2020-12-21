@@ -5,12 +5,12 @@
 #-------------------------------------------------
 
 TEMPLATE = app
-TARGET = dplatform-qt
+TARGET = dplatformos-qt
 CONFIG(debug, debug|release) {
-    TARGET = dplatform-qt-Debug
+    TARGET = dplatformos-qt-Debug
 }
 VERSION = 1.0.0
-INCLUDEPATH +=  /usr/local/include src ./ ./src/connector ./src/seedUi ./src/functionui ./src/qrencode ./src/menu ./src/mainui
+INCLUDEPATH +=  /usr/local/include src ./ ./src ./src/connector ./src/seedUi ./src/functionui ./src/qrencode ./src/menu ./src/mainui
 DEFINES += QT_GUI WIN32_LEAN_AND_MEAN
 CONFIG += no_include_pwd
 CONFIG += thread
@@ -30,7 +30,7 @@ OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build
 
-SOURCES += main.cpp \
+SOURCES += src/main.cpp \
     src/functionui/qvalidatedlineedit.cpp \
     src/functionui/notificator.cpp \
     src/functionui/bitcoinunits.cpp \
@@ -175,7 +175,7 @@ FORMS    += \
 
 RESOURCES += src/bitcoin.qrc
 
-#When define #QT_DEBUG do not use "change data dir" of the menu, otherwise data may be destroyed, caused by not close dplatform in void ManageUI::CloseDplatform(){}
+#When define #QT_DEBUG do not use "change data dir" of the menu, otherwise data may be destroyed, caused by not close dplatformos in void ManageUI::CloseDplatform(){}
 
 CODECFORTR = UTF-8
 
@@ -220,7 +220,7 @@ macx:OBJECTIVE_SOURCES += src/functionui/macnotificationhandler.mm
 macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
 macx:ICON = src/res/icons/bitcoin.icns
-macx:TARGET = "dplatform-qt"
+macx:TARGET = "dplatformos-qt"
 macx:QMAKE_CFLAGS_THREAD += -pthread
 macx:QMAKE_LFLAGS_THREAD += -pthread
 macx:QMAKE_CXXFLAGS_THREAD += -pthread

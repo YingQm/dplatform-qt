@@ -52,7 +52,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Dplatform 开发框架地址: %1</source>
+        <source>Dplatformos 开发框架地址: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -706,7 +706,7 @@ ONLY the third party wallet deposit supported, please use transfer-in and transf
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dplatform-qt</source>
+        <source>dplatformos-qt</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

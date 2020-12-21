@@ -17,11 +17,11 @@ void CloseingThread::run()
     while (true)
     {
         if(!GetProcessidFromName()) {
-            emit DplatformClosed();
+            emit DplatformosClosed();
             break;
         } else {
             if(g_lpManageUI)
-                g_lpManageUI->CloseDplatformTemp();
+                g_lpManageUI->CloseDplatformosTemp();
         }
         sleep(10);
     }
@@ -37,14 +37,14 @@ CloseingDialog::CloseingDialog(QWidget *parent, CloseType type)
     setWindowFlags(Qt::Dialog | Qt::WindowMinimizeButtonHint); // 没有帮助按钮
 
     m_lpCloseingThread = new CloseingThread();
-    connect(m_lpCloseingThread, SIGNAL(DplatformClosed()), this, SLOT(DplatformClosed()));
+    connect(m_lpCloseingThread, SIGNAL(DplatformosClosed()), this, SLOT(DplatformosClosed()));
 
     switch (m_Type) {
     case CloseUI:
         this->setWindowTitle(tr("关闭"));
         m_lpCloseingThread->start();
         break;
-    case RestartNewDplatform:
+    case RestartNewDplatformos:
         this->setWindowTitle(tr("操作"));
         ui->labelText->setText(tr("正在处理，请稍等..."));
         PostJsonMessage(ID_GetWalletStatus);
@@ -69,18 +69,18 @@ void CloseingDialog::requestFinished(const QVariant &result, const QString &/*er
     }
 }
 
-void CloseingDialog::DplatformClosed()
+void CloseingDialog::DplatformosClosed()
 {
-    qDebug() << ("关闭 退出 DplatformClosed 界面");
-    if(m_Type == RestartNewDplatform) {
+    qDebug() << ("关闭 退出 DplatformosClosed 界面");
+    if(m_Type == RestartNewDplatformos) {
         if(g_lpManageUI) {
             g_lpManageUI->StartThread();
-            g_lpManageUI->startDplatform();
+            g_lpManageUI->startDplatformos();
             g_lpManageUI->UnlockWallet(m_isWalletLock, m_isTicketLock);
         }
 
         if(g_lpMainUI) {
-            g_lpMainUI->ResumeCommunicateDplatformThread();
+            g_lpMainUI->ResumeCommunicateDplatformosThread();
         }
     }
 

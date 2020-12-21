@@ -53,7 +53,7 @@
     </message>
     <message>
         <location line="+5"/>
-        <source>Dplatform 开发框架地址: %1</source>
+        <source>Dplatformos 开发框架地址: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1510,7 +1510,7 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     <message>
         <location line="+0"/>
         <location line="+12"/>
-        <source>dplatform-qt</source>
+        <source>dplatformos-qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

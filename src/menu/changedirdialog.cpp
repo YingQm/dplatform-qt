@@ -28,7 +28,7 @@ void CopyThread::run()
             break;
         } else {
             if(g_lpManageUI)
-                g_lpManageUI->CloseDplatformTemp();
+                g_lpManageUI->CloseDplatformosTemp();
         }
         sleep(10);
     }

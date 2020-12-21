@@ -90,7 +90,7 @@
         <item>
          <widget class="QLabel" name="labelAbout">
           <property name="text">
-           <string>一种简单稳定、扩展性强的区块链网络</string>
+           <string>面向全球的安全、透明、高效的区块链网络</string>
           </property>
          </widget>
         </item>

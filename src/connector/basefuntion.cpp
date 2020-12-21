@@ -55,7 +55,7 @@ QString GetSpecialFolderPath(int nFolder, bool fCreate)
 
 QString GetRegDataDir()
 {
-    QString fileName = "HKEY_CURRENT_USER\\Software\\" + CStyleConfig::GetInstance().GetDplatformName() + "\\" + CStyleConfig::GetInstance().GetAppName_en();
+    QString fileName = "HKEY_CURRENT_USER\\Software\\" + CStyleConfig::GetInstance().GetDplatformosName() + "\\" + CStyleConfig::GetInstance().GetAppName_en();
     QSettings *pReg = new QSettings(fileName, QSettings::NativeFormat);
     QString strDir = pReg->value("strDataDir").toString(); //读取注册表值
     strDir.replace("/", "\\");
@@ -68,7 +68,7 @@ void SetRegDataDir(QString strDataDir)
 {
     strDataDir.replace("/", "\\");
     strDataDir.replace("\\\\", "\\");
-    QString fileName = "HKEY_CURRENT_USER\\Software\\" + CStyleConfig::GetInstance().GetDplatformName() + "\\" + CStyleConfig::GetInstance().GetAppName_en();
+    QString fileName = "HKEY_CURRENT_USER\\Software\\" + CStyleConfig::GetInstance().GetDplatformosName() + "\\" + CStyleConfig::GetInstance().GetAppName_en();
     QSettings *pReg = new QSettings(fileName, QSettings::NativeFormat);
     pReg->setValue("strDataDir", strDataDir);
     delete pReg;
@@ -76,10 +76,10 @@ void SetRegDataDir(QString strDataDir)
 
 QString GetDefaultDataDir()
 {
-    //! Windows < Vista: C:\Documents and Settings\Username\Application Data\dplatform-qt
-    //! Windows >= Vista: C:\Users\Username\AppData\Roaming\dplatform-qt
-    //! Mac: ~/Library/Application Support/dplatform-qt
-    //! Unix: ~/.dplatform-qt
+    //! Windows < Vista: C:\Documents and Settings\Username\Application Data\dplatformos-qt
+    //! Windows >= Vista: C:\Users\Username\AppData\Roaming\dplatformos-qt
+    //! Mac: ~/Library/Application Support/dplatformos-qt
+    //! Unix: ~/.dplatformos-qt
 #ifdef WIN32
     QString strDir = GetRegDataDir();
     if(strDir.isEmpty())
@@ -217,7 +217,7 @@ void outputMessage(QtMsgType type, const QMessageLogContext &context, const QStr
     QString current_date_hour = QString("_%1_%2").arg(current_date_time.mid(0, 10)).arg(current_date_time.mid(11,2));
     QString message = QString("%1 %2 %3 (%4)").arg(text).arg(context_info).arg(msg).arg(current_date_time);
 
-    QString strUILog = GetDefaultDataDir() + "/logs/dplatform-qt" + current_date_hour + ".txt";
+    QString strUILog = GetDefaultDataDir() + "/logs/dplatformos-qt" + current_date_hour + ".txt";
     QFile file(strUILog);
     file.open(QIODevice::WriteOnly | QIODevice::Append);
     QTextStream text_stream(&file);
@@ -539,7 +539,7 @@ bool GetProcessidFromName()
     pe32.dwSize = sizeof(PROCESSENTRY32);
     if (Process32First(hProcessSnap, &pe32)) {
         do{
-            int nWcsicmp = wcsicmp(pe32.szExeFile, CStyleConfig::GetInstance().GetDplatformExe().toStdWString().c_str());
+            int nWcsicmp = wcsicmp(pe32.szExeFile, CStyleConfig::GetInstance().GetDplatformosExe().toStdWString().c_str());
             if(nWcsicmp == 0) {
                 bRet = true;
                 break;
@@ -553,13 +553,13 @@ bool GetProcessidFromName()
 #else
     char line[200];
     FILE *fp;
-    std::string cmd = "ps -fe | grep '" + CStyleConfig::GetInstance().GetDplatformExe().toStdString() + " ' | grep -v grep";
+    std::string cmd = "ps -fe | grep '" + CStyleConfig::GetInstance().GetDplatformosExe().toStdString() + " ' | grep -v grep";
     const char *sysCommand = cmd.data();
     if ((fp = popen(sysCommand, "r")) != NULL) {
         fgets(line, sizeof(line)-1, fp);
         std::string strResult = line;
 
-        if(strResult.find(CStyleConfig::GetInstance().GetDplatformExe().toStdString().c_str()) != std::string::npos)
+        if(strResult.find(CStyleConfig::GetInstance().GetDplatformosExe().toStdString().c_str()) != std::string::npos)
             bRet = true;
     }
     pclose(fp);

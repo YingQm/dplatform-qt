@@ -27,8 +27,8 @@ AboutDialog::~AboutDialog()
 void AboutDialog::requestFinished(const QVariant &result, const QString &/*error*/)
 {
     QMap<QString, QVariant> resultMap = result.toMap();
-    if(!resultMap["dplatform"].toString().isEmpty()) {
-        QString strVersion = "dplatform:" + resultMap["dplatform"].toString() + " app:" + resultMap["app"].toString() + " localDb:" + resultMap["localDb"].toString();
+    if(!resultMap["dplatformos"].toString().isEmpty()) {
+        QString strVersion = "dplatformos:" + resultMap["dplatformos"].toString() + " app:" + resultMap["app"].toString() + " localDb:" + resultMap["localDb"].toString();
         ui->versionLabel->setText(strVersion);
         if (g_lpMainUI) {
             g_lpMainUI->m_strVersion = strVersion;
@@ -69,7 +69,7 @@ void AboutDialog::initAboutUi()
     if (m_strFrameUrl.isEmpty()) {
         ui->frameLabel->setVisible(false);
     } else {
-        QString strFrameName = "Dplatform";
+        QString strFrameName = "Dplatformos Operating system";
         if (!m_strFrameName.isEmpty()) {
             strFrameName = m_strFrameName;
         }

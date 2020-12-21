@@ -90,9 +90,6 @@ void MainUI::initUI()
 	PostJsonMessage(ID_GetVersion);
 
 	setWindowTitle(tr("%1钱包-正式版 %2").arg(CStyleConfig::GetInstance().GetAppName(), m_strVersion));
-	if (CStyleConfig::GetInstance().GetCoinsType() == TOKEN_YCC) {
-		setWindowTitle(tr("%1钱包-测试版 %2").arg(CStyleConfig::GetInstance().GetAppName(), m_strVersion));
-	}
 
 	m_platformStyle = PlatformStyle::instantiate("other");
 #ifndef Q_OS_MAC
@@ -186,7 +183,7 @@ void MainUI::createActions()
 	}
 	aboutAction = new QAction(m_platformStyle->SingleColorIcon(strMainIcon), tr("关于%1(&A)").arg(CStyleConfig::GetInstance().GetAppName()), this);
 
-    connect(quitAction, SIGNAL(triggered()), g_lpManageUI, SLOT(CloseDplatform()));
+    connect(quitAction, SIGNAL(triggered()), g_lpManageUI, SLOT(CloseDplatformos()));
 	connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
 
 	connect(changePassphraseAction, SIGNAL(triggered()), this, SLOT(changePassphrase()));
@@ -230,10 +227,6 @@ void MainUI::createMenuBar()
 #ifdef WIN32
 	settings->addAction(changeDirAction);
 #endif
-	// ycc 先屏蔽离线授权挖矿
-	if (CStyleConfig::GetInstance().GetCoinsType() != TOKEN_YCC) {
-		settings->addAction(devolutionAction);
-	}
 	settings->addAction(veifySeedAction);
 
 	QMenu *help = appMenuBar->addMenu(tr("&Help"));
@@ -434,24 +427,24 @@ void MainUI::changeDir()
 {
 	ChangeDirDialog dlg;
 	int r = dlg.exec();
-    m_lpStatusBarUI->RestartDplatformInit();
+    m_lpStatusBarUI->RestartDplatformosInit();
 	if (r == 2)
 	{
-        ResumeCommunicateDplatformThread();
+        ResumeCommunicateDplatformosThread();
 	}
 }
 
 void MainUI::openRepairTime()
 {
 	setRepairTimeStatus(true);
-    CloseingDialog dlg(this, RestartNewDplatform);
+    CloseingDialog dlg(this, RestartNewDplatformos);
 	dlg.exec();
 }
 
 void MainUI::closeRepairTime()
 {
 	setRepairTimeStatus(false);
-    CloseingDialog dlg(this, RestartNewDplatform);
+    CloseingDialog dlg(this, RestartNewDplatformos);
 	dlg.exec();
 }
 
@@ -525,15 +518,13 @@ void MainUI::requestFinished(const QVariant &result, const QString &/*error*/)
 	}
 	else if (ID_GetVersion == m_nID)
 	{
-        if (!resultMap["dplatform"].toString().isEmpty())
+        if (!resultMap["dplatformos"].toString().isEmpty())
 		{
-            m_strVersion = "dplatform:" + resultMap["dplatform"].toString() + " app:" + resultMap["app"].toString() + " localDb:" + resultMap["localDb"].toString();
+            m_strVersion = "dplatformos:" + resultMap["dplatformos"].toString() + " app:" + resultMap["app"].toString() + " localDb:" + resultMap["localDb"].toString();
 			setWindowTitle(tr("%1钱包-正式版 %2").arg(CStyleConfig::GetInstance().GetAppName(), m_strVersion));
-			if (CStyleConfig::GetInstance().GetCoinsType() == TOKEN_YCC) {
-				setWindowTitle(tr("%1钱包-测试版 %2").arg(CStyleConfig::GetInstance().GetAppName(), m_strVersion));
-			}
+
 #ifdef QT_DEBUG
-			setWindowTitle(tr("%1钱包-test %2").arg(CStyleConfig::GetInstance().GetAppName(), m_strVersion));
+            setWindowTitle(tr("%1钱包-测试版 %2").arg(CStyleConfig::GetInstance().GetAppName(), m_strVersion));
 #endif
 		}
 		else
@@ -547,14 +538,14 @@ void MainUI::requestFinished(const QVariant &result, const QString &/*error*/)
 	}
 }
 
-void MainUI::StopCommunicateDplatformThread()
+void MainUI::StopCommunicateDplatformosThread()
 {
 	m_lpStatusBarUI->StopUpdateStatusBar();
 	m_lpAddressUI->StopMyAddressListThread();
 	m_lpHomepageUI->StopWalletSendUpdateThread();
 }
 
-void MainUI::ResumeCommunicateDplatformThread()
+void MainUI::ResumeCommunicateDplatformosThread()
 {
 	m_lpStatusBarUI->ResumeUpdateStatusBar();
 	m_lpAddressUI->ResumeMyAddressListThread();

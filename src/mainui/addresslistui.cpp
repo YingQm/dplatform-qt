@@ -139,11 +139,6 @@ AddressListUI::AddressListUI(AddrModeType mode, AddrTypeTabs tab, QWidget *paren
     contextMenu->addAction(copyAddressAction);
     contextMenu->addAction(copyLabelAction);
     contextMenu->addAction(editAction);
-    if (tab == TabsReceiving && CStyleConfig::GetInstance().GetCoinsType() == TOKEN_YCC) {
-        QAction *editMiningAction = new QAction(tr("&Set Minging"), this);
-        contextMenu->addAction(editMiningAction);
-        connect(editMiningAction, SIGNAL(triggered()), this, SLOT(onSetMiningAction()));
-    }
     contextMenu->addAction(deleteAction);
     contextMenu->setStyleSheet("QMenu {background-color:#2c2c2c;} QMenu::item:selected { background-color:#454545; }");
     if (CStyleConfig::GetInstance().GetStyleType() == QSS_BLUE)
@@ -355,27 +350,6 @@ void AddressListUI::onEditAction()
             break;
         }
     }
-}
-
-void AddressListUI::onSetMiningAction()
-{
-    if(!ui->tableView->selectionModel())
-        return;
-    QModelIndexList indexes = ui->tableView->selectionModel()->selectedRows();
-    if(indexes.isEmpty())
-        return;
-
-    QModelIndex origIndex = proxyModel->mapToSource(indexes.at(0));
-    if (origIndex.data(Item_Label).toString() == "airdropaddr"){
-        QMessageBox::warning(this, tr("提示"), tr("airdropaddr 地址不能设置为挖矿地址!"));
-        return;
-    }
-    QJsonObject jsonParms;
-    jsonParms.insert("addr", origIndex.data(Item_Address).toString());
-    jsonParms.insert("label", "mining");
-    QJsonArray params;
-    params.insert(0, jsonParms);
-    PostJsonMessage(ID_SetLabl, params);
 }
 
 void AddressListUI::contextualMenu(const QPoint &point)
