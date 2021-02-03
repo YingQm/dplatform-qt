@@ -73,7 +73,14 @@ enum IdType{
     ID_GetAccounts_GetBalance,
     ID_CreateRawTxGroup,
     ID_GetCoinSymbol,
-    ID_GetProperFee
+    ID_GetProperFee,
+    ID_ConvertExectoAddr,
+    ID_EnablePrivacy,
+    ID_ShowPrivacyKey,
+    ID_PrivacyCreateRawTransaction,
+    ID_ShowPrivacyAccountInfo,
+    ID_ShowPrivacyAccountSpend,
+    ID_GetPrivacyTxByAddr
 };
 
 class BaseJsonConnector

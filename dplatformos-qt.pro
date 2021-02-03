@@ -10,7 +10,7 @@ CONFIG(debug, debug|release) {
     TARGET = dplatformos-qt-Debug
 }
 VERSION = 1.0.0
-INCLUDEPATH +=  /usr/local/include src ./ ./src ./src/connector ./src/seedUi ./src/functionui ./src/qrencode ./src/menu ./src/mainui
+INCLUDEPATH +=  /usr/local/include src ./ ./src ./src/connector ./src/seedUi ./src/functionui ./src/qrencode ./src/menu ./src/mainui ./src/privacyui
 DEFINES += QT_GUI WIN32_LEAN_AND_MEAN
 CONFIG += no_include_pwd
 CONFIG += thread
@@ -70,7 +70,8 @@ SOURCES += src/main.cpp \
     src/menu/changedirdialog.cpp \
     src/menu/closeingdialog.cpp \
     src/connector/clearthread.cpp \
-    src/connector/cstyleconfig.cpp
+    src/connector/cstyleconfig.cpp \
+    src/privacyui/privacyui.cpp
 
 greaterThan(QT_MAJOR_VERSION, 4) {
     SOURCES += src/menu/receiverequestdialog.cpp \
@@ -131,7 +132,8 @@ HEADERS  += \
     src/menu/changedirdialog.h \
     src/menu/closeingdialog.h \
     src/connector/clearthread.h \
-    src/connector/cstyleconfig.h
+    src/connector/cstyleconfig.h \
+    src/privacyui/privacyui.h
 
 greaterThan(QT_MAJOR_VERSION, 4) {
     HEADERS += src/menu/receiverequestdialog.h \
@@ -171,7 +173,8 @@ FORMS    += \
     src/forms/changedirdialog.ui \
     src/forms/closeingdialog.ui \
     src/forms/veifyseeddialog.ui \
-    src/forms/receiverequestdialog.ui
+    src/forms/receiverequestdialog.ui \
+    src/forms/privacyui.ui
 
 RESOURCES += src/bitcoin.qrc
 

@@ -13,3 +13,4 @@ dplatformos-qt.vcxproj.user
 debug/
 Makefile*
 object_script.*
+.gitattributes

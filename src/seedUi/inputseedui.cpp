@@ -29,6 +29,7 @@ InputSeedUi::InputSeedUi(QWidget *parent, int Tab, QWidget *seedUi)
     , m_nTab (Tab)
     , m_seedUi (seedUi)
 {
+    qInfo() << ("in InputSeedUi, m_seedUi: ") << m_seedUi;
     ui->setupUi(this);
     Init();
 }
@@ -130,6 +131,7 @@ void InputSeedUi::requestFinished(const QVariant &result, const QString &error)
     bool isOK = resultMap["isOK"].toBool();
     if(ID_SaveSeed == m_nID) {
         if(isOK) {
+            hideSeedUI();
             QJsonObject jsonParms;
             jsonParms.insert("passwd", ui->SeedPsdEdit->text());
             jsonParms.insert("timeout", 0);
@@ -137,9 +139,7 @@ void InputSeedUi::requestFinished(const QVariant &result, const QString &error)
             QJsonArray params;
             params.insert(0, jsonParms);
             PostJsonMessage(ID_UnLock, params);
-
-            if(m_seedUi)
-                m_seedUi->hide();
+            hideSeedUI();
         } else {
             // error
             ui->SeedErrorLabel->setVisible(true);
@@ -150,6 +150,8 @@ void InputSeedUi::requestFinished(const QVariant &result, const QString &error)
             qCritical() << ("ID_UnLock error ") << g_mapErrorCode[resultMap["msg"].toString()];
             if(g_lpMainUI)
                 g_lpMainUI->show();
+
+            hideSeedUI();
         } else {
             if(InputSeed_Tab == m_nTab) {
                 m_nCount = 0;
@@ -174,6 +176,8 @@ void InputSeedUi::requestFinished(const QVariant &result, const QString &error)
         if(g_lpMainUI) {
             g_lpMainUI->show();
         }
+
+        hideSeedUI();
 
         QElapsedTimer t;
         t.start();
@@ -231,6 +235,17 @@ bool InputSeedUi::eventFilter(QObject *target, QEvent *event)
     }
 
     return QWidget::eventFilter(target, event);
+}
+
+void InputSeedUi::hideSeedUI()
+{
+    if(m_seedUi) {
+        m_seedUi->hide();
+    } else if(this->parentWidget() && this->parentWidget()->parentWidget()) {
+        this->parentWidget()->parentWidget()->hide();
+    } else {
+        qInfo() << ("hideSeedUI fail");
+    }
 }
 
 void InputSeedUi::on_SeedPrevBtn_clicked()

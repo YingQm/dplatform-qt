@@ -25,6 +25,9 @@ public:
 
     virtual bool eventFilter(QObject *target, QEvent *event);
 
+private:
+    void hideSeedUI();
+
 signals:
     void on_PrevBtn();
 

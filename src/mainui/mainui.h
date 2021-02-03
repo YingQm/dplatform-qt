@@ -15,6 +15,7 @@
 class PlatformStyle;
 class HomepageUI;
 class AddressUI;
+class PrivacyUi;
 class Notificator;
 class StatusBarUI;
 class CliConsole;
@@ -59,6 +60,7 @@ private:
 public:
     HomepageUI* m_lpHomepageUI;
     AddressUI*  m_lpAddressUI;
+    PrivacyUi*  m_lpPrivacyUi;
     StatusBarUI* m_lpStatusBarUI;
 
     QString     m_strPsd;
@@ -67,6 +69,7 @@ public:
 private:
     QAction *m_lpHomepageAction;
     QAction *m_lpAddressAction;
+    QAction *m_lpPrivacyAction;
 
     QStackedWidget *centralWidget;
     QMenuBar *appMenuBar;
@@ -109,6 +112,7 @@ public slots:
 private slots:
     void gotoOverviewPage();
     void gotoAddressBookPage();
+    void gotoPrivacyPage();
 
     /** Show window if hidden, unminimize when minimized, rise when obscured or show if hidden and fToggleHidden is true */
     void showNormalIfMinimized(bool fToggleHidden = false);

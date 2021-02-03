@@ -137,7 +137,7 @@ void WalletSendUI::SetTimeStatus(int nDiff)
 
 void WalletSendUI::initUI()
 {
-	this->setStyleSheet(CStyleConfig::GetInstance().GetStylesheet_child());
+    this->setStyleSheet(CStyleConfig::GetInstance().GetStylesheet_child());
 	if (CStyleConfig::GetInstance().GetStyleType() == QSS_BLUE) {
 		this->setStyleSheet("QWidget {background-color:#FFFFFF;border:none;}" + CStyleConfig::GetInstance().GetStylesheet());
 		ui->sendwidget1_3->setStyleSheet("QWidget {background-color:#F5F4F9;border-radius: 4px;}");

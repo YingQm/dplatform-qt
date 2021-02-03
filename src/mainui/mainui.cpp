@@ -31,6 +31,7 @@
 #endif
 #include "homepageui.h"
 #include "addressui.h"
+#include "privacyui.h"
 #include "notificator.h"
 #include "guiconstants.h"
 #include "statusbarui.h"
@@ -117,11 +118,13 @@ void MainUI::initUI()
 
 	m_lpHomepageUI = new HomepageUI(this, m_platformStyle);
 	m_lpAddressUI = new AddressUI(this, m_platformStyle);
+    m_lpPrivacyUi = new PrivacyUi(this, m_platformStyle);
 	connect(m_lpAddressUI, SIGNAL(signalupdateWalletInfo(QList<QVariant>)), m_lpHomepageUI, SLOT(slotupdateWalletInfo(QList<QVariant>)));
 
 	centralWidget = new QStackedWidget(this);
-	centralWidget->addWidget(m_lpHomepageUI);
-	centralWidget->addWidget(m_lpAddressUI);
+    centralWidget->addWidget(m_lpHomepageUI);
+    centralWidget->addWidget(m_lpAddressUI);
+    centralWidget->addWidget(m_lpPrivacyUi);
 
 	//  centralWidget->addWidget(m_lpAssetsManageUi);
 	setCentralWidget(centralWidget);
@@ -146,15 +149,22 @@ void MainUI::createActions()
 	m_lpHomepageAction->setCheckable(true);
 	tabGroup->addAction(m_lpHomepageAction);
 
-	m_lpAddressAction = new QAction(tr("地址簿"), this);
-	m_lpAddressAction->setToolTip(tr("编辑存储地址和标签的列表"));
-	m_lpAddressAction->setCheckable(true);
-	tabGroup->addAction(m_lpAddressAction);
+    m_lpAddressAction = new QAction(tr("地址簿"), this);
+    m_lpAddressAction->setToolTip(tr("编辑存储地址和标签的列表"));
+    m_lpAddressAction->setCheckable(true);
+    tabGroup->addAction(m_lpAddressAction);
+
+    m_lpPrivacyAction = new QAction(tr("隐私交易"), this);
+    m_lpPrivacyAction->setToolTip(tr("隐私交易"));
+    m_lpPrivacyAction->setCheckable(true);
+    tabGroup->addAction(m_lpPrivacyAction);
 
 	connect(m_lpHomepageAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
 	connect(m_lpHomepageAction, SIGNAL(triggered()), this, SLOT(gotoOverviewPage()));
 	connect(m_lpAddressAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
 	connect(m_lpAddressAction, SIGNAL(triggered()), this, SLOT(gotoAddressBookPage()));
+    connect(m_lpPrivacyAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
+    connect(m_lpPrivacyAction, SIGNAL(triggered()), this, SLOT(gotoPrivacyPage()));
 
 	quitAction = new QAction(QIcon(":/icons/quit"), tr("E&xit"), this);
 	quitAction->setToolTip(tr("Quit application"));
@@ -227,7 +237,8 @@ void MainUI::createMenuBar()
 #ifdef WIN32
 	settings->addAction(changeDirAction);
 #endif
-	settings->addAction(veifySeedAction);
+    settings->addAction(devolutionAction);
+    settings->addAction(veifySeedAction);
 
 	QMenu *help = appMenuBar->addMenu(tr("&Help"));
 	help->addAction(openRPCConsoleAction);
@@ -244,8 +255,9 @@ void MainUI::createToolBars()
 	else {
 		toolbar->setStyleSheet("QToolButton { background-color: transparent; width: 100px; color: #ffffff;} QToolButton:hover { background-color: #2c2c2c; } QToolButton:checked, QToolButton:pressed { background-color: transparent; color: #ffba26; }");
 	}
-	toolbar->addAction(m_lpHomepageAction);
-	toolbar->addAction(m_lpAddressAction);
+    toolbar->addAction(m_lpHomepageAction);
+    toolbar->addAction(m_lpAddressAction);
+    toolbar->addAction(m_lpPrivacyAction);
 	toolbar->setMovable(false); // 不可拖动
 	toolbar->resize(100, 50);
 }
@@ -315,7 +327,13 @@ void MainUI::gotoAddressBookPage()
 {
 	m_lpAddressAction->setChecked(true);
 	centralWidget->setCurrentWidget(m_lpAddressUI);
-	m_lpAddressUI->m_lpMyAddressList->PostMsgGetAccounts();
+    m_lpAddressUI->m_lpMyAddressList->PostMsgGetAccounts();
+}
+
+void MainUI::gotoPrivacyPage()
+{
+    m_lpPrivacyAction->setChecked(true);
+    centralWidget->setCurrentWidget(m_lpPrivacyUi);
 }
 
 void MainUI::showNormalIfMinimized(bool fToggleHidden)

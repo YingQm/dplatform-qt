@@ -155,6 +155,11 @@ int main(int argc, char *argv[])
     lpmainUI->setStyleSheet(CStyleConfig::GetInstance().GetStylesheet_main());
     lpmainUI->hide();
 
+#ifdef QT_DEBUG
+    lpmainUI->show();
+    lpManageUI->hide();
+#endif
+
     app.connect( &app, SIGNAL( lastWindowClosed() ), lpManageUI, SLOT( CloseDplatformos() ) );
     app.connect( &app, SIGNAL( lastWindowClosed() ), &app, SLOT( quit() ) );
 

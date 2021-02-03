@@ -66,6 +66,13 @@ void InitMethodMap()
     g_methodMap.insert(ID_CreateRawTxGroup, "DplatformOS.CreateRawTxGroup");
     g_methodMap.insert(ID_GetCoinSymbol, "DplatformOS.GetCoinSymbol");
     g_methodMap.insert(ID_GetProperFee, "DplatformOS.GetProperFee");
+    g_methodMap.insert(ID_ConvertExectoAddr, "DplatformOS.ConvertExectoAddr");
+    g_methodMap.insert(ID_EnablePrivacy, "privacy.EnablePrivacy");
+    g_methodMap.insert(ID_ShowPrivacyKey, "privacy.ShowPrivacyKey");
+    g_methodMap.insert(ID_PrivacyCreateRawTransaction, "privacy.CreateRawTransaction");
+    g_methodMap.insert(ID_ShowPrivacyAccountInfo, "privacy.ShowPrivacyAccountInfo");
+    g_methodMap.insert(ID_ShowPrivacyAccountSpend, "privacy.ShowPrivacyAccountSpend");
+    g_methodMap.insert(ID_ShowPrivacyAccountSpend, "privacy.GetPrivacyTxByAddr");
 }
 
 BaseJsonConnector::BaseJsonConnector()

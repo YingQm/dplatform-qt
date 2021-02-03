@@ -6,6 +6,7 @@
 #include "base58.h"
 #include "addresslistui.h"
 #include "basefuntion.h"
+#include "platformstyle.h"
 
 OfflineMiningDialog::OfflineMiningDialog(QWidget *parent, const PlatformStyle *platformStyle) :
     JsonConnectorDialog(parent),
@@ -26,6 +27,8 @@ OfflineMiningDialog::OfflineMiningDialog(QWidget *parent, const PlatformStyle *p
     ui->buttonBox->button(QDialogButtonBox::Save)->setVisible(false);
     ui->ErrorVerticalWidget->setVisible(false);
     ui->ResultVerticalWidget->setVisible(false);
+
+    ui->toolButton->setIcon(m_platformStyle->SingleColorIcon(":/address_book"));
 }
 
 OfflineMiningDialog::~OfflineMiningDialog()
@@ -34,14 +37,8 @@ OfflineMiningDialog::~OfflineMiningDialog()
 }
 
 void OfflineMiningDialog::accept()
-{/*
-#ifdef QT_DEBUG
-    ui->buttonBox->button(QDialogButtonBox::Save)->setVisible(true);
-    ui->ErrorVerticalWidget->setVisible(false);
-    ui->ResultVerticalWidget->setVisible(true);
-    ui->txhexBindEdit->setText(tr("0x7ee6331ed623de7f02721f84f898a502494f9a2f6524cce942fb077e0624896d"));
-    ui->txhexTransEdit->setText(tr("0x652ee6331ed623de7f02721f84f4cce942fb077e0624896d7898a502494f9a2f"));
-#endif*/
+{
+
 }
 
 void OfflineMiningDialog::PostMsgCreateBindMiner()
@@ -180,8 +177,7 @@ void OfflineMiningDialog::CreateTxhex()
 {
     QString strOriginAddr = ui->originAddrEdit->text();
     QString strBindAddr = ui->bindAddrEdit->text();
-   QString strAmount = ui->AmountEdit->text();
-//    qint64 nAmount = strAmount.toDouble()*le8;
+    QString strAmount = ui->AmountEdit->text();
 
     if(strBindAddr.isEmpty() || strOriginAddr.isEmpty() || strAmount.isEmpty())
     {

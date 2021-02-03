@@ -5,7 +5,7 @@
     <name>AboutDialog</name>
     <message>
         <source>一种简单稳定、扩展性强的区块链网络</source>
-        <translation type="unfinished">A simple, stable and highly expandable block chain network</translation>
+        <translation type="obsolete">A simple, stable and highly expandable block chain network</translation>
     </message>
     <message>
         <source>版本获取失败</source>
@@ -21,7 +21,7 @@
     </message>
     <message>
         <source>版权所有 © 2018 %1开发组</source>
-        <translation type="unfinished">Copyright © 2018 The %1 developers</translation>
+        <translation type="obsolete">Copyright © 2018 The %1 developers</translation>
     </message>
     <message>
         <source>版本获取失败，请在控制台输入 version 获取版本</source>
@@ -45,19 +45,39 @@
     </message>
     <message>
         <source>区块链浏览器地址: %1</source>
-        <translation type="obsolete">Block chain browser address: %1</translation>
+        <translation type="unfinished">Block chain browser address: %1</translation>
     </message>
     <message>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Dplatformos 开发框架地址: %1</source>
+        <source>面向全球的安全、透明、高效的区块链网络</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>官方网站 和 文档地址: %1</source>
+        <source>开发框架地址:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>文档地址:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 开发框架地址: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>官方网站: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>文档地址: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>版权所有 © 2020 %1开发组</source>
+        <translation type="unfinished">Copyright © 2018 The %1 developers {2020 %1开?}</translation>
     </message>
 </context>
 <context>
@@ -163,24 +183,20 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Set Minging</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>错误</source>
         <translation type="unfinished">error</translation>
     </message>
     <message>
-        <source>设置挖矿地址失败,%1</source>
-        <translation type="unfinished">Failed to set mining address, %1 </translation>
+        <source>隐藏地址失败,%1</source>
+        <translation type="unfinished">Failed to conceal address, %1 </translation>
     </message>
     <message>
-        <source>设置挖矿地址成功</source>
-        <translation type="unfinished">Set mining address successfully</translation>
+        <source>隐藏地址成功</source>
+        <translation type="unfinished">Conceal address successfully</translation>
     </message>
     <message>
         <source>airdropaddr 地址不能设置为挖矿地址!</source>
-        <translation type="unfinished">Airdropaddr address cannot be set to mine address!</translation>
+        <translation type="obsolete">Airdropaddr address cannot be set to mine address!</translation>
     </message>
 </context>
 <context>
@@ -1001,7 +1017,7 @@ ONLY the third party wallet deposit supported, please use transfer-in and transf
     </message>
     <message>
         <source>%1钱包-test %2</source>
-        <translation type="unfinished">%1-test-%2</translation>
+        <translation type="obsolete">%1-test-%2</translation>
     </message>
     <message>
         <source>验证助记词(&amp;V)</source>
@@ -1044,7 +1060,11 @@ ONLY the third party wallet deposit supported, please use transfer-in and transf
     </message>
     <message>
         <source>%1钱包-正式版 %2</source>
-        <translation type="unfinished">%1-%2</translation>
+        <translation type="obsolete">%1-%2</translation>
+    </message>
+    <message>
+        <source>%1钱包</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1245,7 +1265,11 @@ Only the third-party wallet can be used to charge money to the wallet, and the a
     </message>
     <message>
         <source>%1钱包-正式版 %2</source>
-        <translation type="unfinished">%1-%2</translation>
+        <translation type="obsolete">%1-%2</translation>
+    </message>
+    <message>
+        <source>%1钱包</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1814,10 +1838,6 @@ Only the third-party wallet can be used to charge money to the wallet, and the a
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Pay To:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1827,10 +1847,6 @@ Only the third-party wallet can be used to charge money to the wallet, and the a
     </message>
     <message>
         <source>Choose address from address book</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

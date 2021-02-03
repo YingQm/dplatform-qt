@@ -156,9 +156,9 @@ void ManageUI::requestFinished(const QVariant &result, const QString &/*error*/)
         }
         else
         {
-            qInfo() << ("show seed ui");
             SeedUi* lpSeedUI = new SeedUi();
             lpSeedUI->setStyleSheet(m_stylesheet);
+            qInfo() << ("show seed ui, lpSeedUI: ") << lpSeedUI;
             lpSeedUI->show();
         }
     }
