@@ -54,6 +54,7 @@ void CStyleConfig::readConfigFile()
 
     m_stylesheet_main = "QWidget {background-color:#2c2c2c;border:none;}" + m_stylesheet;
     m_stylesheet_child = "QWidget {background-color:#3d3d3d;border:none;}" + m_stylesheet;
+    m_stylesheet_child2 = "QWidget {background: transparent;}" + m_stylesheet;
 
     if (m_stylesheet_type == "blue") {
         m_stylesheet_main = m_stylesheet;

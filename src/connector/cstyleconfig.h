@@ -34,6 +34,7 @@ public:
     const QString &GetStylesheet() const { return m_stylesheet; }
     const QString &GetStylesheet_main() const { return m_stylesheet_main; }
     const QString &GetStylesheet_child() const { return m_stylesheet_child; }
+    const QString &GetStylesheet_child2() const { return m_stylesheet_child2; }
     const QString &GetDplatformosPath() const { return m_strDplatformosPath; }
     const QString &GetDplatformoscliPath() const { return m_strDplatformoscliPath; }
     const QString &GetDplatformosExe() const { return m_strDplatformosExe; }
@@ -62,6 +63,7 @@ private:
     QString m_stylesheet;
     QString m_stylesheet_main;      // 颜色主样式
     QString m_stylesheet_child;
+    QString m_stylesheet_child2;
 
     QString m_strDplatformosPath;
     QString m_strDplatformoscliPath;

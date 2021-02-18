@@ -132,6 +132,10 @@ void MainUI::initUI()
 	m_lpHomepageAction->setChecked(true);
 	centralWidget->setCurrentWidget(m_lpHomepageUI);
 
+#ifdef QT_DEBUG
+    gotoPrivacyPage();
+#endif
+
 	createStatusBar();
 
 	// 启动的时候 钱包默认为加锁状态

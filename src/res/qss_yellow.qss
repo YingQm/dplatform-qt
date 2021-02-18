@@ -282,13 +282,15 @@ QRadioButton::indicator:unchecked {
     image: url(:/icons/yellow_radio_unchecked);
 }
 
-QFrame#line1px, QFrame#line_2_1px { background-color: #2c2c2c; height: 1px; }
+QFrame#line1px, QFrame#line_2_1px, QFrame#line1_1px, QFrame#line_1_1px { background-color: #2c2c2c; height: 1px; }
 
 QWidget#sendwidget1_0, QWidget#sendwidget1_1, QWidget#sendwidget1_2, QWidget#sendwidget1_3, QWidget#selectWidget {background-color:#2c2c2c;border-radius: 4px;}
 
 QLabel { background: transparent; }
 
 QValidatedLineEdit:!enabled#fromAddr { background: transparent; }
+
+QWidget#privacyWalletWidget, QWidget#privacySendWidget, QWidget#privacyTxsWidget {background:#3d3d3d;border-radius: 4px;}
 
 
 

@@ -408,7 +408,7 @@ void WalletSendUI::requestFinished(const QVariant &result, const QString &error)
 		SetMaxPropertyAddr(strMaxAddr, GetbalanceD(dMaxBalance));
 		SetUpProperty(GetbalanceD(dBalance), GetbalanceD(m_dFrozen));
 	}
-	else if (ID_GetBalance_ticket == m_nID) {
+    else if (ID_GetBalance == m_nID) {
 		m_dFrozen = 0.0;
 
 		QList<QVariant> BalanceList = result.toList();
@@ -428,7 +428,7 @@ void WalletSendUI::requestFinished(const QVariant &result, const QString &error)
 
 void WalletSendUI::DealPostMsgGetTicketBalance(const QString &cmd)
 {
-	PostJsonMessage(ID_GetBalance_ticket, cmd.toStdString().c_str());
+    PostJsonMessage(ID_GetBalance, cmd.toStdString().c_str());
 }
 
 void WalletSendUI::StopWalletSendUpdateThread()
