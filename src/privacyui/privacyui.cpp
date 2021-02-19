@@ -4,6 +4,8 @@
 #include "platformstyle.h"
 #include "addresslistui.h"
 #include "addressui.h"
+#include "base58.h"
+#include "sendtocontractdialog.h"
 #include "mainui.h"
 
 extern MainUI*              g_lpMainUI;
@@ -12,75 +14,12 @@ PrivacyUi::PrivacyUi(QWidget *parent, const PlatformStyle *platformStyle) :
     JsonConnectorWidget(parent),
     m_platformStyle(platformStyle),
     ui(new Ui::PrivacyUi),
-    m_strSelectedAddr("")
+    m_strSelectedAddr(""),
+    m_strConvertExectoAddr("")
 {
     ui->setupUi(this);
     initUI();
-
-    return;
-
-
-
-    // 获取privacy合约地址
-    {
-        QJsonObject jsonParms;
-        jsonParms.insert("execname", "privacy");
-        QJsonArray params;
-        params.insert(0, jsonParms);
-        PostJsonMessage(ID_ConvertExectoAddr, params);
-    }
-
-    // 转账到隐私合约
-    {
-        QJsonObject jsonParms;
-        jsonParms.insert("from", "strAddr");
-        jsonParms.insert("to", "1BXvgjmBw1aBgmGn1hjfGyRkmN3krWpFP4");
-        jsonParms.insert("amount", 0);
-        jsonParms.insert("note", "test");
-        QJsonArray params;
-        params.insert(0, jsonParms);
-        PostJsonMessage(ID_SendToAddress, params);
-    }
-
-    // 构建交易 type:1 公对私转账, 2 私对私转账, 3 私到公转账
-    {
-        QJsonObject jsonParms;
-        jsonParms.insert("type", "1");
-        jsonParms.insert("from", "1BXvgjmBw1aBgmGn1hjfGyRkmN3krWpFP4");
-        jsonParms.insert("amount", 0);
-        jsonParms.insert("pubkeypair", "test");
-        QJsonArray params;
-        params.insert(0, jsonParms);
-        PostJsonMessage(ID_SendToAddress, params);
-    }
-
-    // 构建交易 3 私到公转账
-    {
-        QJsonObject jsonParms;
-        jsonParms.insert("type", "1");
-        jsonParms.insert("from", "1BXvgjmBw1aBgmGn1hjfGyRkmN3krWpFP4");
-        jsonParms.insert("to", "1BXvgjmBw1aBgmGn1hjfGyRkmN3krWpFP4");
-        jsonParms.insert("amount", 0);
-        QJsonArray params;
-        params.insert(0, jsonParms);
-        PostJsonMessage(ID_SendToAddress, params);
-    }
-
-
-
-    // 查询钱包中指定地址的隐私交易
-    {
-        QJsonObject jsonParms;
-        jsonParms.insert("address", "1BXvgjmBw1aBgmGn1hjfGyRkmN3krWpFP4");
-        jsonParms.insert("sendRecvFlag", 0);    // send or recv flag (0: send, 1: recv)
-        jsonParms.insert("direction", 0);       // query direction (0: pre page, 1: next page), valid with seedtxhash param
-        jsonParms.insert("count", 10);          // number of transactions
-        jsonParms.insert("seedtxhash", "xxxxx");
-        QJsonArray params;
-        params.insert(0, jsonParms);
-        PostJsonMessage(ID_GetPrivacyTxByAddr, params);
-    }
-
+    PostMsgGetConvertAddr();
 }
 
 PrivacyUi::~PrivacyUi()
@@ -92,12 +31,6 @@ void PrivacyUi::initUI()
 {
     // wallet
     ui->sendWidget->setStyleSheet(CStyleConfig::GetInstance().GetStylesheet_child2());
-    //ui->verticalWidget0->setAttribute(Qt::WA_StyledBackground);
-    //ui->verticalWidget0->setStyleSheet("QWidget{background-color:#6A33AA}");
-    //ui->verticalWidget0->setStyleSheet(CStyleConfig::GetInstance().GetStylesheet_child());
-    //ui->verticalWidget1->setStyleSheet(CStyleConfig::GetInstance().GetStylesheet_child());
-   // ui->verticalWidget0->setStyleSheet("border-radius:4px;");
-   //ui->verticalWidget1->setStyleSheet("border-radius:4px;");
     if (CStyleConfig::GetInstance().GetStyleType() == QSS_BLUE) {
         this->setStyleSheet("QWidget {background-color:#FFFFFF;border:none;}" + CStyleConfig::GetInstance().GetStylesheet());
         ui->sendwidget1_3->setStyleSheet("QWidget {background-color:#F5F4F9;border-radius: 4px;}");
@@ -105,8 +38,7 @@ void PrivacyUi::initUI()
     else {
         ui->sendwidget1_3->setStyleSheet("QWidget {background-color:#2c2c2c;border-radius: 4px;}");
     }
-
-  //  ui->copyBtn->setFocusPolicy(Qt::NoFocus);
+    ui->addrEdit->setEnabled(false);
 
 #ifndef MAC_OSX
     ui->labelBalance->setStyleSheet("QLabel { font: " + QString::number(GetBaseFontSize() + 2) + "pt;}");
@@ -122,11 +54,12 @@ void PrivacyUi::initUI()
     ui->addressBookButton->setIcon(m_platformStyle->SingleColorIcon(":/address_book"));
     ui->selectBtn->setIcon(m_platformStyle->SingleColorIcon(":/address_book"));
 
-
     // tx list
     ui->privacyTxsWidget->setStyleSheet(CStyleConfig::GetInstance().GetStylesheet_child2());
     ui->searchWidget->setVisible(false);
     ui->prevPageBtn->setEnabled(false);
+    ui->typeWidget->addItem("发送方", 0);
+    ui->typeWidget->addItem("接收方", 1);
 }
 
 void PrivacyUi::requestFinished(const QVariant &result, const QString &error)
@@ -160,12 +93,14 @@ void PrivacyUi::requestFinished(const QVariant &result, const QString &error)
             totalAmount += utxosMap["amount"].toDouble();
         }
         ui->labelPrivacy->setText(QString::number(GetbalanceD(totalAmount), 'f', 4));
+    } else if (ID_ConvertExectoAddr == m_nID) {
+        m_strConvertExectoAddr = result.toString();
     }
 }
 
+// 开启隐私功能
 void PrivacyUi::PostMsgOpenPrivacy(const QString &addr)
 {
-    // 开启隐私功能
     QJsonObject jsonParms;
     jsonParms.insert("addrs", addr);
     QJsonArray params;
@@ -173,9 +108,9 @@ void PrivacyUi::PostMsgOpenPrivacy(const QString &addr)
     PostJsonMessage(ID_EnablePrivacy, params);
 }
 
+// 获取隐私地址
 void PrivacyUi::PostMsgShowPrivacyKey(const QString &addr)
 {
-    // 获取隐私地址
     QJsonObject jsonParms;
     jsonParms.insert("data", addr);
     QJsonArray params;
@@ -183,18 +118,18 @@ void PrivacyUi::PostMsgShowPrivacyKey(const QString &addr)
     PostJsonMessage(ID_ShowPrivacyKey, params);
 }
 
+// 获取合约中的地址余额
 void PrivacyUi::PostMsgGetContractBalance(const QString &addr)
 {
-    // 获取合约中的地址余额
     QString jsonCmd = "{\"addresses\":[\"";
     jsonCmd.append(addr);
     jsonCmd.append("\"], \"execer\":\"privacy\"}");
     PostJsonMessage(ID_GetBalance, jsonCmd.toStdString().c_str());
 }
 
+// 查询utxo余额信息
 void PrivacyUi::PostMsgGetPrivacyBalance(const QString &addr)
 {
-    // 查询utxo余额信息
     QJsonObject jsonParms;
     jsonParms.insert("addr", addr);
     jsonParms.insert("token", CStyleConfig::GetInstance().GetUnitName());
@@ -203,7 +138,95 @@ void PrivacyUi::PostMsgGetPrivacyBalance(const QString &addr)
     PostJsonMessage(ID_ShowPrivacyAccountInfo, params);
 }
 
+// 查询钱包中指定地址的隐私交易
+void PrivacyUi::PostMsgPrivacyListTxs(const QString &addr, int direction, const QString &seedtxhash)
+{
+    QJsonObject jsonParms;
+    jsonParms.insert("address", addr);
+    jsonParms.insert("sendRecvFlag", ui->typeWidget->currentData().toInt());     // send or recv flag (0: send, 1: recv)
+    jsonParms.insert("direction", direction);       // query direction (0: pre page, 1: next page), valid with seedtxhash param
+    jsonParms.insert("count", 15);                  // number of transactions
+    jsonParms.insert("seedtxhash", seedtxhash);
+    jsonParms.insert("assetExec", "coins");
+    QJsonArray params;
+    params.insert(0, jsonParms);
+    PostJsonMessage(ID_GetPrivacyTxByAddr, params);
+}
 
+// 构建交易
+void PrivacyUi::PostMsgCreatePrivacyTx(const QString &fromAddr, const QString &toAddr, double amount, const QString &note)
+{
+    // type:1 公对私转账, 2 私对私转账, 3 私到公转账
+    int type = 0;
+    if(!IsAddrValid(fromAddr.toStdString().c_str()) && !IsAddrValid(toAddr.toStdString().c_str())) {
+        type = 2;
+    } else if (!IsAddrValid(fromAddr.toStdString().c_str())) {
+        type = 3;
+    } else if (!IsAddrValid(toAddr.toStdString().c_str())) {
+        type = 1;
+    } else {
+        QMessageBox::information(this, tr("提示"), tr("地址输入有误, 必须有隐私地址!"));
+        return;
+    }
+
+    QJsonObject jsonParms;
+    jsonParms.insert("type", type);
+    jsonParms.insert("from", fromAddr);
+    jsonParms.insert("amount", amount);
+    if (type == 3) {
+        jsonParms.insert("to", toAddr);
+    } else {
+        jsonParms.insert("pubkeypair", toAddr);
+    }
+    jsonParms.insert("note", note);
+    QJsonArray params;
+    params.insert(0, jsonParms);
+    PostJsonMessage(ID_PrivacyCreateRawTransaction, params);
+}
+
+void PrivacyUi::PostMsgSignPrivacyTx(const QString &privkey, const QString &txHex)
+{
+    // 签名
+    QJsonObject jsonParms;
+    jsonParms.insert("expire", "300s");
+    jsonParms.insert("privkey", privkey);
+    jsonParms.insert("txHex", txHex);
+    QJsonArray params;
+    params.insert(0, jsonParms);
+    PostJsonMessage(ID_SignRawTx, params);
+}
+
+void PrivacyUi::PostMsgSendPrivacyTx(const QString &signHex)
+{
+    // 发送
+    QJsonObject jsonParms;
+    jsonParms.insert("data", signHex);
+    QJsonArray params;
+    params.insert(0, jsonParms);
+    PostJsonMessage(ID_SendTransaction, params);
+}
+
+// 获取隐私合约地址
+void PrivacyUi::PostMsgGetConvertAddr()
+{
+    QJsonObject jsonParms;
+    jsonParms.insert("execname", "privacy");
+    QJsonArray params;
+    params.insert(0, jsonParms);
+    PostJsonMessage(ID_ConvertExectoAddr, params);
+}
+
+// 转账到隐私合约
+void PrivacyUi::PostMsgSendPrivacyConvert(const QString &fromAddr, const QString &toAddr, double amount)
+{
+    QJsonObject jsonParms;
+    jsonParms.insert("from", fromAddr);
+    jsonParms.insert("to", toAddr);
+    jsonParms.insert("amount", amount);
+    QJsonArray params;
+    params.insert(0, jsonParms);
+    PostJsonMessage(ID_SendToAddress, params);
+}
 
 void PrivacyUi::on_selectBtn_clicked()
 {
@@ -215,12 +238,15 @@ void PrivacyUi::on_selectBtn_clicked()
         PostMsgOpenPrivacy(m_strSelectedAddr);
         PostMsgGetContractBalance(m_strSelectedAddr);
         PostMsgGetPrivacyBalance(m_strSelectedAddr);
+
+        on_firstPageBtn_clicked();
     }
 }
 
 void PrivacyUi::on_rollOutBtn_clicked()
 {
-
+    SendToContractDialog dlg(this);
+    dlg.exec();
 }
 
 void PrivacyUi::on_copyBtn_clicked()
@@ -254,7 +280,10 @@ void PrivacyUi::on_addressBookButton_clicked()
 
 void PrivacyUi::on_clearButton_clicked()
 {
-
+    ui->payTo->clear();
+    ui->addAsLabel->clear();
+    ui->payAmount->clear();
+    ui->payTo->setFocus();
 }
 
 void PrivacyUi::on_sendButton_clicked()
@@ -262,14 +291,17 @@ void PrivacyUi::on_sendButton_clicked()
 
 }
 
-void PrivacyUi::on_typeWidget_activated(int index)
+void PrivacyUi::on_typeWidget_currentIndexChanged(int index)
 {
-
+    if (!m_strSelectedAddr.isEmpty()) {
+        on_firstPageBtn_clicked();
+    }
 }
 
 void PrivacyUi::on_firstPageBtn_clicked()
-{
-
+{    
+    ui->prevPageBtn->setEnabled(false);
+    PostMsgPrivacyListTxs(m_strSelectedAddr, 0 ,"");
 }
 
 void PrivacyUi::on_prevPageBtn_clicked()
@@ -279,5 +311,6 @@ void PrivacyUi::on_prevPageBtn_clicked()
 
 void PrivacyUi::on_nextPageBtn_clicked()
 {
+    ui->prevPageBtn->setEnabled(true);
 
 }

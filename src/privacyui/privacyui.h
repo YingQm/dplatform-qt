@@ -29,7 +29,12 @@ private:
     void PostMsgShowPrivacyKey(const QString &addr);
     void PostMsgGetContractBalance(const QString &addr);
     void PostMsgGetPrivacyBalance(const QString &addr);
-
+    void PostMsgPrivacyListTxs(const QString &addr, int direction, const QString &seedtxhash);
+    void PostMsgCreatePrivacyTx(const QString &fromAddr, const QString &toAddr, double amount, const QString &note);
+    void PostMsgSignPrivacyTx(const QString &privkey, const QString &txHex);
+    void PostMsgSendPrivacyTx(const QString &signHex);
+    void PostMsgGetConvertAddr();
+    void PostMsgSendPrivacyConvert(const QString &fromAddr, const QString &toAddr, double amount);
 
 private slots:
     // wallet
@@ -45,17 +50,19 @@ private slots:
     void on_sendButton_clicked();
 
     // txs
-    void on_typeWidget_activated(int index);
+    void on_typeWidget_currentIndexChanged(int index);
     void on_firstPageBtn_clicked();
     void on_prevPageBtn_clicked();
     void on_nextPageBtn_clicked();
+
 
 private:
     Ui::PrivacyUi *ui;
     const PlatformStyle *m_platformStyle;
 
-    // 当前选中的地址
-    QString m_strSelectedAddr;
+    QString m_strSelectedAddr;          // 当前选中的地址
+    QString m_strConvertExectoAddr;     // 隐私合约地址
+
 };
 
 #endif // PRIVACYUI_H

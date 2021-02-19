@@ -133,7 +133,6 @@ bool BaseJsonConnector::bPrintf()
             || m_nID == ID_CreateRawTradeSellTx
             || m_nID == ID_CreateRawTradeBuyTx
             || m_nID == ID_CreateRawTradeRevokeTx
-            || m_nID == ID_SignRawTx
             || m_nID == ID_SignRawTx_CreateBindMiner
             || m_nID == ID_SignRawTx_CreateRawTransaction
             || m_nID == ID_CreateRawTxGroup

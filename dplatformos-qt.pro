@@ -71,7 +71,8 @@ SOURCES += src/main.cpp \
     src/menu/closeingdialog.cpp \
     src/connector/clearthread.cpp \
     src/connector/cstyleconfig.cpp \
-    src/privacyui/privacyui.cpp
+    src/privacyui/privacyui.cpp \
+    src/privacyui/sendtocontractdialog.cpp
 
 greaterThan(QT_MAJOR_VERSION, 4) {
     SOURCES += src/menu/receiverequestdialog.cpp \
@@ -133,7 +134,8 @@ HEADERS  += \
     src/menu/closeingdialog.h \
     src/connector/clearthread.h \
     src/connector/cstyleconfig.h \
-    src/privacyui/privacyui.h
+    src/privacyui/privacyui.h \
+    src/privacyui/sendtocontractdialog.h
 
 greaterThan(QT_MAJOR_VERSION, 4) {
     HEADERS += src/menu/receiverequestdialog.h \
@@ -174,7 +176,8 @@ FORMS    += \
     src/forms/closeingdialog.ui \
     src/forms/veifyseeddialog.ui \
     src/forms/receiverequestdialog.ui \
-    src/forms/privacyui.ui
+    src/forms/privacyui.ui \
+    src/forms/sendtocontractdialog.ui
 
 RESOURCES += src/bitcoin.qrc
 

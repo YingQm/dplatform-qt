@@ -288,7 +288,7 @@ QWidget#sendwidget1_0, QWidget#sendwidget1_1, QWidget#sendwidget1_2, QWidget#sen
 
 QLabel { background: transparent; }
 
-QValidatedLineEdit:!enabled#fromAddr { background: transparent; }
+QValidatedLineEdit:!enabled#fromAddr, QLineEdit:!enabled#addrEdit { background: transparent; }
 
 QWidget#privacyWalletWidget, QWidget#privacySendWidget, QWidget#privacyTxsWidget {background:#3d3d3d;border-radius: 4px;}
 

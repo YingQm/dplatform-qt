@@ -179,4 +179,9 @@ enum OrderTableItem_2
     Item_Order_TxIdKey = Qt::UserRole + 1
 };
 
+enum ContractCoinsType {
+    ContractRollIn = 0,      // 转入合约
+    ContractRollOut = 1      // 转出合约
+};
+
 #endif // ENUMTYPE_H
