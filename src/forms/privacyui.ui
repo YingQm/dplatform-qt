@@ -286,7 +286,7 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="rollOutBtn">
+                  <widget class="QPushButton" name="rollInBtn">
                    <property name="minimumSize">
                     <size>
                      <width>80</width>
@@ -300,7 +300,7 @@
                     </size>
                    </property>
                    <property name="text">
-                    <string>合约转出</string>
+                    <string>合约充值</string>
                    </property>
                   </widget>
                  </item>
@@ -360,7 +360,7 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="rollInBtn">
+                  <widget class="QPushButton" name="rollOutBtn">
                    <property name="minimumSize">
                     <size>
                      <width>80</width>
@@ -374,7 +374,7 @@
                     </size>
                    </property>
                    <property name="text">
-                    <string>合约充值</string>
+                    <string>合约转出</string>
                    </property>
                   </widget>
                  </item>

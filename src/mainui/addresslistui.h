@@ -5,7 +5,6 @@
  * 单个地址界面
  */
 
-#include <QDialog>
 #include <QAction>
 #include <QMenu>
 #include <QApplication>

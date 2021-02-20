@@ -15,11 +15,12 @@ PrivacyUi::PrivacyUi(QWidget *parent, const PlatformStyle *platformStyle) :
     m_platformStyle(platformStyle),
     ui(new Ui::PrivacyUi),
     m_strSelectedAddr(""),
-    m_strConvertExectoAddr("")
+    m_coinsBalance(0.0),
+    m_contractBalance(0.0),
+    m_privacyBalance(0.0)
 {
     ui->setupUi(this);
     initUI();
-    PostMsgGetConvertAddr();
 }
 
 PrivacyUi::~PrivacyUi()
@@ -84,7 +85,8 @@ void PrivacyUi::requestFinished(const QVariant &result, const QString &error)
             QMessageBox::information(this, tr("提示"), tr("获取隐私地址失败, %1").arg(error));
         }
     } else if (ID_GetBalance == m_nID) {
-        ui->labelContract->setText(QString::number(GetbalanceD(resultMap["balance"].toDouble()), 'f', 4));
+        m_contractBalance = GetbalanceD(resultMap["balance"].toDouble());
+        ui->labelContract->setText(QString::number(m_contractBalance, 'f', 4));
     } else if (ID_ShowPrivacyAccountInfo == m_nID) {
         double totalAmount = 0.0;
         QList<QVariant> utxosList = resultMap["utxos"].toList();
@@ -92,9 +94,8 @@ void PrivacyUi::requestFinished(const QVariant &result, const QString &error)
             QMap<QString, QVariant> utxosMap = utxosList[i].toMap();
             totalAmount += utxosMap["amount"].toDouble();
         }
-        ui->labelPrivacy->setText(QString::number(GetbalanceD(totalAmount), 'f', 4));
-    } else if (ID_ConvertExectoAddr == m_nID) {
-        m_strConvertExectoAddr = result.toString();
+        m_privacyBalance = GetbalanceD(totalAmount);
+        ui->labelPrivacy->setText(QString::number(m_privacyBalance, 'f', 4));
     }
 }
 
@@ -206,47 +207,20 @@ void PrivacyUi::PostMsgSendPrivacyTx(const QString &signHex)
     PostJsonMessage(ID_SendTransaction, params);
 }
 
-// 获取隐私合约地址
-void PrivacyUi::PostMsgGetConvertAddr()
-{
-    QJsonObject jsonParms;
-    jsonParms.insert("execname", "privacy");
-    QJsonArray params;
-    params.insert(0, jsonParms);
-    PostJsonMessage(ID_ConvertExectoAddr, params);
-}
-
-// 转账到隐私合约
-void PrivacyUi::PostMsgSendPrivacyConvert(const QString &fromAddr, const QString &toAddr, double amount)
-{
-    QJsonObject jsonParms;
-    jsonParms.insert("from", fromAddr);
-    jsonParms.insert("to", toAddr);
-    jsonParms.insert("amount", amount);
-    QJsonArray params;
-    params.insert(0, jsonParms);
-    PostJsonMessage(ID_SendToAddress, params);
-}
-
 void PrivacyUi::on_selectBtn_clicked()
 {
     AddressListUI dlg(ForSending, TabsReceiving, this, m_platformStyle);
     if (dlg.exec()) {
         m_strSelectedAddr = dlg.getReturnAddr();
         ui->addrEdit->setText(m_strSelectedAddr);
-        ui->labelBalance->setText(QString::number(dlg.getBalance(), 'f', 4));
+        m_coinsBalance = dlg.getBalance();
+        ui->labelBalance->setText(QString::number(m_coinsBalance, 'f', 4));
         PostMsgOpenPrivacy(m_strSelectedAddr);
         PostMsgGetContractBalance(m_strSelectedAddr);
         PostMsgGetPrivacyBalance(m_strSelectedAddr);
 
         on_firstPageBtn_clicked();
     }
-}
-
-void PrivacyUi::on_rollOutBtn_clicked()
-{
-    SendToContractDialog dlg(this);
-    dlg.exec();
 }
 
 void PrivacyUi::on_copyBtn_clicked()
@@ -256,7 +230,14 @@ void PrivacyUi::on_copyBtn_clicked()
 
 void PrivacyUi::on_rollInBtn_clicked()
 {
+    SendToContractDialog dlg(m_strSelectedAddr, m_coinsBalance, ContractRollIn, this);
+    dlg.exec();
+}
 
+void PrivacyUi::on_rollOutBtn_clicked()
+{
+    SendToContractDialog dlg(m_strSelectedAddr, m_contractBalance, ContractRollOut, this);
+    dlg.exec();
 }
 
 void PrivacyUi::on_addressFromButton_clicked()

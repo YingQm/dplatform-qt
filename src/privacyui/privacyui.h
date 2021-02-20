@@ -33,15 +33,13 @@ private:
     void PostMsgCreatePrivacyTx(const QString &fromAddr, const QString &toAddr, double amount, const QString &note);
     void PostMsgSignPrivacyTx(const QString &privkey, const QString &txHex);
     void PostMsgSendPrivacyTx(const QString &signHex);
-    void PostMsgGetConvertAddr();
-    void PostMsgSendPrivacyConvert(const QString &fromAddr, const QString &toAddr, double amount);
 
 private slots:
     // wallet
     void on_selectBtn_clicked();
-    void on_rollOutBtn_clicked();
     void on_copyBtn_clicked();
     void on_rollInBtn_clicked();
+    void on_rollOutBtn_clicked();
 
     // send
     void on_addressFromButton_clicked();
@@ -61,7 +59,9 @@ private:
     const PlatformStyle *m_platformStyle;
 
     QString m_strSelectedAddr;          // 当前选中的地址
-    QString m_strConvertExectoAddr;     // 隐私合约地址
+    double m_coinsBalance;
+    double m_contractBalance;
+    double m_privacyBalance;
 
 };
 

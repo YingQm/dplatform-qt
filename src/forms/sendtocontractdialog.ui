@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>554</width>
-    <height>234</height>
+    <width>495</width>
+    <height>188</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,7 +21,7 @@
     <number>20</number>
    </property>
    <property name="topMargin">
-    <number>20</number>
+    <number>30</number>
    </property>
    <property name="rightMargin">
     <number>20</number>
@@ -30,18 +30,35 @@
     <number>20</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="label_4">
+       <property name="styleSheet">
+        <string notr="true">QLabel { color: #ec5151; }</string>
+       </property>
+       <property name="text">
+        <string>请确认钱包已经解锁！</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <property name="spacing">
+      <number>10</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="fromLabel">
        <property name="text">
         <string>充值地址</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="fromAddrLabel">
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -62,36 +79,45 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <property name="spacing">
+      <number>10</number>
+     </property>
      <item>
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="toLabel">
        <property name="text">
-        <string>TextLabel</string>
+        <string>充值金额</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="toAmountEdit"/>
      </item>
      <item>
-      <widget class="QLabel" name="label_6">
-       <property name="text">
-        <string>TextLabel</string>
+      <widget class="QToolButton" name="toolButton">
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>16777215</height>
+        </size>
        </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>钱包密码：</string>
+        <string>全部</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_2"/>
+      <widget class="QLabel" name="availableAmountLabel">
+       <property name="text">
+        <string>可充值:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="amountLabel">
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -110,10 +136,16 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <property name="spacing">
+      <number>10</number>
+     </property>
      <item>
-      <widget class="QLabel" name="label_5">
+      <widget class="QLabel" name="errorLabel">
+       <property name="styleSheet">
+        <string notr="true">QLabel { color: #ec5151; }</string>
+       </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -131,16 +163,28 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="okBtn">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="text">
-        <string>PushButton</string>
+        <string>确定</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="cancelBtn">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="text">
-        <string>PushButton</string>
+        <string>关闭</string>
        </property>
       </widget>
      </item>
