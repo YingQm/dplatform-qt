@@ -20,6 +20,8 @@ void InitMethodMap()
     g_methodMap.insert(ID_NewAccount, "DplatformOS.NewAccount");
     g_methodMap.insert(ID_GetAccounts, "DplatformOS.GetAccounts");
     g_methodMap.insert(ID_GetBalance, "DplatformOS.GetBalance");
+    g_methodMap.insert(ID_GetBalance_coins, "DplatformOS.GetBalance");
+    g_methodMap.insert(ID_GetBalance_privacy, "DplatformOS.GetBalance");
     g_methodMap.insert(ID_MergeBalance, "DplatformOS.MergeBalance");
     g_methodMap.insert(ID_SetTxFee, "DplatformOS.SetTxFee");
     g_methodMap.insert(ID_SendToAddress, "DplatformOS.SendToAddress");

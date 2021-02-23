@@ -22,6 +22,7 @@
 #define le3  1000
 #define lem7 0.000001
 #define lem10 0.0000000001
+#define COUNT_NUM   15      // 交易列表默认显示个数
 
 /** General change type (added, updated, removed). */
 enum ChangeType

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
@@ -4226,7 +4226,7 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     <message>
         <location line="+172"/>
         <source>&lt;b&gt;%1 %2&lt;/b&gt; to %3 (%4)</source>
-        <translation type="unfinished">&lt;b&gt;%1&lt;/b&gt; 至 %2 (%3) {1 %2&lt;?} {3 ?} {4)?}</translation>
+        <translation type="unfinished">&lt;b&gt;%1 %2&lt;/b&gt; 至 %3 (%4)</translation>
     </message>
     <message>
         <location line="+115"/>

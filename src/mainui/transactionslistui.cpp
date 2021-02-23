@@ -13,8 +13,6 @@
 #include "addresslistui.h"
 #include "cstyleconfig.h"
 
-#define COUNT_NUM   15
-
 void TransactionsThread::SetRunPostMsg(bool bRunPostMsg)
 {
     m_mutex.lock();

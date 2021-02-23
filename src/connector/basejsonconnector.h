@@ -28,6 +28,8 @@ enum IdType{
     ID_NewAccount,
     ID_GetAccounts,
     ID_GetBalance,
+    ID_GetBalance_coins,
+    ID_GetBalance_privacy,
     ID_MergeBalance,
     ID_SetTxFee,
     ID_SendToAddress,

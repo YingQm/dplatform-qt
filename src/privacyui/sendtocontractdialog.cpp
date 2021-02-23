@@ -10,11 +10,11 @@ SendToContractDialog::SendToContractDialog(QString strAddr, double amount, Contr
     m_strAddr(strAddr)
 {
     ui->setupUi(this);
-    initUI();
-    PostMsgGetConvertAddr();
     if (amount >= CStyleConfig::GetInstance().GetMinFee()) {
         m_amount = amount - CStyleConfig::GetInstance().GetMinFee();
     }
+    initUI();
+    PostMsgGetConvertAddr();
 }
 
 SendToContractDialog::~SendToContractDialog()
@@ -46,6 +46,7 @@ void SendToContractDialog::initUI()
     QString strMaxUse = QString::number(m_amount, 'f', 4) + " " + CStyleConfig::GetInstance().GetUnitName();
     ui->amountLabel ->setText(strMaxUse);
     ui->toAmountEdit->setValidator(new QDoubleValidator(0.0, 5*le8, 4, this));
+    ui->fromAddrLabel->setText(m_strAddr);
 }
 
 // 转账到隐私合约
@@ -54,7 +55,7 @@ void SendToContractDialog::PostMsgSendPrivacyConvert(const QString &fromAddr, co
     QJsonObject jsonParms;
     jsonParms.insert("from", fromAddr);
     jsonParms.insert("to", toAddr);
-    jsonParms.insert("amount", amount);
+    jsonParms.insert("amount", amount*le8);
     QJsonArray params;
     params.insert(0, jsonParms);
     PostJsonMessage(ID_SendToAddress, params);
@@ -72,8 +73,7 @@ void SendToContractDialog::PostMsgGetConvertAddr()
 
 void SendToContractDialog::requestFinished(const QVariant &result, const QString &error)
 {
-    QMap<QString, QVariant> resultMap = result.toMap();
-
+    //QMap<QString, QVariant> resultMap = result.toMap();
     if (ID_ConvertExectoAddr == m_nID) {
         m_strConvertExectoAddr = result.toString();
     } else if (ID_SendToAddress == m_nID) {
@@ -81,7 +81,9 @@ void SendToContractDialog::requestFinished(const QVariant &result, const QString
             ui->errorLabel->setText(error);
             return;
         } else {
-            ui->errorLabel->setText("转账成功，等区块链确认后，等待列表中刷新!");
+            QMessageBox::information(this, tr("提示"), tr("转账成功，等区块链确认后，手动点击刷新按钮!"));
+            close();
+            // ui->errorLabel->setText("转账成功，等区块链确认后，等待列表中刷新!");
         }
     }
 }
@@ -101,7 +103,7 @@ void SendToContractDialog::on_okBtn_clicked()
         PostMsgSendPrivacyConvert(m_strAddr, m_strConvertExectoAddr, ui->toAmountEdit->text().toDouble());
         break;
     case ContractRollOut:
-        PostMsgSendPrivacyConvert(m_strConvertExectoAddr, m_strAddr, ui->toAmountEdit->text().toDouble());
+        PostMsgSendPrivacyConvert(m_strAddr, m_strConvertExectoAddr, (0.0 - ui->toAmountEdit->text().toDouble()));
         break;
     }
 }

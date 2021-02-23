@@ -5,6 +5,7 @@
 #include "basejsonconnector.h"
 
 class PlatformStyle;
+class TransactionsListModel;
 
 namespace Ui {
 class PrivacyUi;
@@ -27,15 +28,17 @@ protected:
 private:
     void PostMsgOpenPrivacy(const QString &addr);
     void PostMsgShowPrivacyKey(const QString &addr);
+    void PostMsgGetCoinsBalance(const QString &addr);
     void PostMsgGetContractBalance(const QString &addr);
     void PostMsgGetPrivacyBalance(const QString &addr);
-    void PostMsgPrivacyListTxs(const QString &addr, int direction, const QString &seedtxhash);
+    void PostMsgPrivacyListTxs();
     void PostMsgCreatePrivacyTx(const QString &fromAddr, const QString &toAddr, double amount, const QString &note);
     void PostMsgSignPrivacyTx(const QString &privkey, const QString &txHex);
     void PostMsgSendPrivacyTx(const QString &signHex);
 
 private slots:
     // wallet
+    void on_refreshBtn_clicked();
     void on_selectBtn_clicked();
     void on_copyBtn_clicked();
     void on_rollInBtn_clicked();
@@ -53,15 +56,21 @@ private slots:
     void on_prevPageBtn_clicked();
     void on_nextPageBtn_clicked();
 
-
 private:
     Ui::PrivacyUi *ui;
     const PlatformStyle *m_platformStyle;
+    TransactionsListModel* model;
 
     QString m_strSelectedAddr;          // 当前选中的地址
     double m_coinsBalance;
     double m_contractBalance;
     double m_privacyBalance;
+
+    QString m_strFromTxPrev;
+    QString m_strFromTxNext;
+    QString m_strFromTx;
+    int m_nPage;        // 当前页数 0表示首页 下一页++ 上一页--
+    int m_ndirection;
 
 };
 
