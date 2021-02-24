@@ -32,7 +32,7 @@ private:
     void PostMsgGetContractBalance(const QString &addr);
     void PostMsgGetPrivacyBalance(const QString &addr);
     void PostMsgPrivacyListTxs();
-    void PostMsgCreatePrivacyTx(const QString &fromAddr, const QString &toAddr, double amount, const QString &note);
+    void PostMsgCreatePrivacyTx(const QString &fromAddr, const QString &toAddr, double amount, const QString &note, int type);
     void PostMsgSignPrivacyTx(const QString &privkey, const QString &txHex);
     void PostMsgSendPrivacyTx(const QString &signHex);
 
@@ -48,7 +48,9 @@ private slots:
     void on_addressFromButton_clicked();
     void on_addressBookButton_clicked();
     void on_clearButton_clicked();
-    void on_sendButton_clicked();
+    void on_Public2PrivacyBtn_clicked();
+    void on_Privacy2PrivacyBtn_clicked();
+    void on_Privacy2PublicBtn_clicked();
 
     // txs
     void on_typeWidget_currentIndexChanged(int index);
@@ -65,6 +67,8 @@ private:
     double m_coinsBalance;
     double m_contractBalance;
     double m_privacyBalance;
+
+    QString m_strTxHex;   // 构造的交易信息
 
     QString m_strFromTxPrev;
     QString m_strFromTxNext;

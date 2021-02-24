@@ -332,6 +332,7 @@ void InitErrorCode()
         g_mapErrorCode.insert("ErrPrivkeyToPub", "私钥生成公钥错误");
         g_mapErrorCode.insert("ErrNotSync", "同步未完成");
         g_mapErrorCode.insert("ErrInvalidPassWord", "密码格式错误");
+        g_mapErrorCode.insert("ErrPubKeyLen", "隐私地址输入有误");
     } else {
         g_mapErrorCode.insert("ErrNotFound", "Not Found");
         g_mapErrorCode.insert("ErrNoBalance", "Low Balance");
@@ -432,6 +433,7 @@ void InitErrorCode()
         g_mapErrorCode.insert("ErrPrivkeyToPub", "Privkey To Pub");
         g_mapErrorCode.insert("ErrNotSync", "Not Sync");
         g_mapErrorCode.insert("ErrInvalidPassWord", "Invalid Password");
+        g_mapErrorCode.insert("ErrPubKeyLen", "Incorrect private address input");
     }
 }
 

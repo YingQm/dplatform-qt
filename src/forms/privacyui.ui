@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1080</width>
-    <height>521</height>
+    <height>481</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -783,13 +783,13 @@
               <property name="minimumSize">
                <size>
                 <width>0</width>
-                <height>190</height>
+                <height>0</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>190</height>
+                <height>16777215</height>
                </size>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -948,63 +948,6 @@
                 </layout>
                </item>
                <item>
-                <layout class="QHBoxLayout" name="privkey">
-                 <property name="spacing">
-                  <number>0</number>
-                 </property>
-                 <item>
-                  <widget class="QWidget" name="sendwidget1_4" native="true">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>30</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>30</height>
-                    </size>
-                   </property>
-                   <layout class="QHBoxLayout" name="horizontalLayout_9">
-                    <property name="spacing">
-                     <number>4</number>
-                    </property>
-                    <property name="leftMargin">
-                     <number>10</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>10</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
-                    <item>
-                     <widget class="QLabel" name="label_4">
-                      <property name="text">
-                       <string>私钥: </string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QValidatedLineEdit" name="privkeyEdit">
-                      <property name="enabled">
-                       <bool>true</bool>
-                      </property>
-                      <property name="toolTip">
-                       <string/>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
                 <layout class="QHBoxLayout" name="Label">
                  <property name="spacing">
                   <number>0</number>
@@ -1155,9 +1098,41 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="sendButton">
+                <widget class="QPushButton" name="Public2PrivacyBtn">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>30</height>
+                  </size>
+                 </property>
                  <property name="text">
-                  <string>发送</string>
+                  <string>公对私发送</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="Privacy2PrivacyBtn">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>30</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>私对私发送</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="Privacy2PublicBtn">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>30</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>私对公发送</string>
                  </property>
                 </widget>
                </item>

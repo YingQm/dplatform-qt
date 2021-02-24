@@ -9,7 +9,7 @@
 #include "cstyleconfig.h"
 
 QMap<IdType, QString>   g_methodMap;
-extern MainUI*              g_lpMainUI;
+extern MainUI*          g_lpMainUI;
 
 void InitMethodMap()
 {
@@ -72,7 +72,7 @@ void InitMethodMap()
     g_methodMap.insert(ID_PrivacyCreateRawTransaction, "privacy.CreateRawTransaction");
     g_methodMap.insert(ID_ShowPrivacyAccountInfo, "privacy.ShowPrivacyAccountInfo");
     g_methodMap.insert(ID_ShowPrivacyAccountSpend, "privacy.ShowPrivacyAccountSpend");
-    g_methodMap.insert(ID_ShowPrivacyAccountSpend, "privacy.GetPrivacyTxByAddr");
+    g_methodMap.insert(ID_GetPrivacyTxByAddr, "privacy.GetPrivacyTxByAddr");
 }
 
 BaseJsonConnector::BaseJsonConnector()
