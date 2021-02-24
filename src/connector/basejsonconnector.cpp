@@ -26,6 +26,7 @@ void InitMethodMap()
     g_methodMap.insert(ID_SetTxFee, "DplatformOS.SetTxFee");
     g_methodMap.insert(ID_SendToAddress, "DplatformOS.SendToAddress");
     g_methodMap.insert(ID_ImportPrivKey, "DplatformOS.ImportPrivkey");
+    g_methodMap.insert(ID_DumpPrivkey, "DplatformOS.DumpPrivkey");
     g_methodMap.insert(ID_WalletTxList, "DplatformOS.WalletTxList");
     g_methodMap.insert(ID_GetMemPool, "DplatformOS.GetMempool");
     g_methodMap.insert(ID_SendTransaction, "DplatformOS.SendTransaction");

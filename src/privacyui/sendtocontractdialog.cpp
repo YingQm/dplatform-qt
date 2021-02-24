@@ -2,19 +2,26 @@
 #include "ui_sendtocontractdialog.h"
 #include "basefuntion.h"
 
+QString g_strConvertExectoAddr;     // 隐私合约地址
+
 SendToContractDialog::SendToContractDialog(QString strAddr, double amount, ContractCoinsType type, QWidget *parent) :
     JsonConnectorDialog(parent),
     ui(new Ui::SendToContractDialog),
     m_type(type),
-    m_strConvertExectoAddr(""),
-    m_strAddr(strAddr)
+    m_strAddr(strAddr),
+    m_amount(0.0)
 {
     ui->setupUi(this);
     if (amount >= CStyleConfig::GetInstance().GetMinFee()) {
-        m_amount = amount - CStyleConfig::GetInstance().GetMinFee();
+        m_amount = amount;
+        if (m_type == ContractRollIn) {
+            m_amount -= CStyleConfig::GetInstance().GetMinFee();
+        }
     }
     initUI();
-    PostMsgGetConvertAddr();
+    if(g_strConvertExectoAddr.isEmpty()) {
+        PostMsgGetConvertAddr();
+    }
 }
 
 SendToContractDialog::~SendToContractDialog()
@@ -73,18 +80,45 @@ void SendToContractDialog::PostMsgGetConvertAddr()
 
 void SendToContractDialog::requestFinished(const QVariant &result, const QString &error)
 {
-    //QMap<QString, QVariant> resultMap = result.toMap();
+    QMap<QString, QVariant> resultMap = result.toMap();
+    if (!error.isEmpty()) {
+        ui->errorLabel->setText(error);
+        return;
+    }
     if (ID_ConvertExectoAddr == m_nID) {
-        m_strConvertExectoAddr = result.toString();
+        g_strConvertExectoAddr = result.toString();
     } else if (ID_SendToAddress == m_nID) {
-        if (!error.isEmpty()) {
-            ui->errorLabel->setText(error);
-            return;
-        } else {
-            QMessageBox::information(this, tr("提示"), tr("转账成功，等区块链确认后，手动点击刷新按钮!"));
-            close();
-            // ui->errorLabel->setText("转账成功，等区块链确认后，等待列表中刷新!");
-        }
+         QMessageBox::information(this, tr("提示"), tr("转账成功，等区块链确认后，手动点击刷新按钮!"));
+         close();
+    } else if (ID_DumpPrivkey == m_nID) {
+        m_strAddrPrivkey = resultMap["data"].toString();
+        QJsonObject jsonParms;
+        jsonParms.insert("from", m_strAddr);
+        jsonParms.insert("amount", ui->toAmountEdit->text().toDouble()*le8);
+        jsonParms.insert("to", g_strConvertExectoAddr);
+        jsonParms.insert("isWithdraw", true);
+        jsonParms.insert("execName", "coins");
+        QJsonArray params;
+        params.insert(0, jsonParms);
+        PostJsonMessage(ID_CreateRawTransaction, params);
+    } else if (ID_CreateRawTransaction == m_nID) {
+        // 签名
+        QJsonObject jsonParms;
+        jsonParms.insert("expire", "300s");
+        jsonParms.insert("privkey", m_strAddrPrivkey);
+        jsonParms.insert("txHex", result.toString());
+        QJsonArray params;
+        params.insert(0, jsonParms);
+        PostJsonMessage(ID_SignRawTx, params);
+    } else if (ID_SignRawTx == m_nID) {
+        // 发送
+        QJsonObject jsonParms;
+        jsonParms.insert("data", result.toString());
+        QJsonArray params;
+        params.insert(0, jsonParms);
+        PostJsonMessage(ID_SendTransaction, params);
+        QMessageBox::information(this, tr("提示"), tr("转账成功，等区块链确认后，手动点击刷新按钮!"));
+        close();
     }
 }
 
@@ -100,10 +134,15 @@ void SendToContractDialog::on_okBtn_clicked()
     switch(m_type)
     {
     case ContractRollIn:
-        PostMsgSendPrivacyConvert(m_strAddr, m_strConvertExectoAddr, ui->toAmountEdit->text().toDouble());
+        PostMsgSendPrivacyConvert(m_strAddr, g_strConvertExectoAddr, ui->toAmountEdit->text().toDouble());
         break;
     case ContractRollOut:
-        PostMsgSendPrivacyConvert(m_strAddr, m_strConvertExectoAddr, (0.0 - ui->toAmountEdit->text().toDouble()));
+        // 获取一下私钥, 签名的时候需要
+        QJsonObject jsonParms;
+        jsonParms.insert("data", m_strAddr);
+        QJsonArray params;
+        params.insert(0, jsonParms);
+        PostJsonMessage(ID_DumpPrivkey, params);
         break;
     }
 }

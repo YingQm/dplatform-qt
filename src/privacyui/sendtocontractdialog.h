@@ -2,7 +2,7 @@
 #define SENDTOCONTRACTDIALOG_H
 
 /*
- * 合约转入转出
+ * 隐私合约转入转出
  */
 
 #include "enumtype.h"
@@ -40,8 +40,8 @@ private slots:
 private:
     Ui::SendToContractDialog *ui;
     ContractCoinsType m_type;
-    QString m_strConvertExectoAddr;     // 隐私合约地址
-    QString m_strAddr;     // 操作的地址
+    QString m_strAddr;          // 操作的地址
+    QString m_strAddrPrivkey;   // 操作的地址私钥
     double m_amount;
 };
 

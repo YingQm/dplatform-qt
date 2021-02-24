@@ -71,7 +71,6 @@ private:
     QString m_strFromTx;
     int m_nPage;        // 当前页数 0表示首页 下一页++ 上一页--
     int m_ndirection;
-
 };
 
 #endif // PRIVACYUI_H

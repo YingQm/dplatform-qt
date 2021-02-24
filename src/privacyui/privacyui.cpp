@@ -66,11 +66,17 @@ void PrivacyUi::initUI()
     strMinFeeText = strMinFeeText + tr("%1, 其他交易手续费需要 1 %1").arg(CStyleConfig::GetInstance().GetUnitName());
     ui->label_fee_text->setText(strMinFeeText);
     ui->payAmount->setValidator(new QDoubleValidator(0.0, 5*le8, 4, this));
-    ui->addAsLabel->setPlaceholderText(tr("输入发送交易的备注信息"));
-    ui->payTo->setPlaceholderText(tr("输入公开地址或者隐私地址"));
-    ui->addAsLabel->setToolTip(tr("输入发送交易的备注信息"));
-    ui->payTo->setToolTip(tr("输入公开地址或者隐私地址"));
-
+    ui->fromAddr->setPlaceholderText(tr("请选择发送方公开地址"));
+    ui->fromAddr->setToolTip(tr("请选择发送方公开地址"));
+    ui->fromAddr->setEnabled(false);
+    ui->payTo->setPlaceholderText(tr("请输入收款方公开地址或者隐私地址"));
+    ui->payTo->setToolTip(tr("请输入收款方公开地址或者隐私地址"));
+    ui->privkeyEdit->setPlaceholderText(tr("请输入发送方的私钥"));
+    ui->privkeyEdit->setToolTip(tr("请输入发送方的私钥"));
+    ui->addAsLabel->setPlaceholderText(tr("请输入发送交易的备注信息"));
+    ui->addAsLabel->setToolTip(tr("请输入发送交易的备注信息"));
+    ui->payAmount->setPlaceholderText(tr("请输入交易的金额"));
+    ui->payAmount->setToolTip(tr("请输入交易的金额"));
     // tx list
     ui->privacyTxsWidget->setStyleSheet(CStyleConfig::GetInstance().GetStylesheet_child2());
     ui->searchWidget->setVisible(false);
@@ -113,7 +119,6 @@ void PrivacyUi::requestFinished(const QVariant &result, const QString &error)
                 return;
             }
         }
-
         QMessageBox::information(this, tr("提示"), tr("获取隐私地址失败, %1").arg(error));
     } else if (ID_ShowPrivacyKey == m_nID) {
         if (!resultMap["pubkeypair"].toString().isEmpty()) {
@@ -137,13 +142,26 @@ void PrivacyUi::requestFinished(const QVariant &result, const QString &error)
         }
     } else if (ID_ShowPrivacyAccountInfo == m_nID) {
         double totalAmount = 0.0;
-        QList<QVariant> utxosList = resultMap["utxos"].toList();
+        QList<QVariant> utxosList = resultMap["utxos"].toMap()["utxos"].toList();
         for(int i=0; i<utxosList.length(); ++i){
             QMap<QString, QVariant> utxosMap = utxosList[i].toMap();
             totalAmount += utxosMap["amount"].toDouble();
         }
         m_privacyBalance = GetbalanceD(totalAmount);
         ui->labelPrivacy->setText(QString::number(m_privacyBalance, 'f', 4));
+    } else if (ID_PrivacyCreateRawTransaction == m_nID) {
+        if (!error.isEmpty()) {
+            QMessageBox::information(this, tr("提示"), tr("发送交易失败, %1").arg(error));
+            return;
+        }
+        PostMsgSignPrivacyTx(ui->privkeyEdit->text(), result.toString());
+    } else if (ID_SignRawTx == m_nID) {
+        if (!error.isEmpty()) {
+            QMessageBox::information(this, tr("提示"), tr("发送交易失败, %1").arg(error));
+            return;
+        }
+        PostMsgSendPrivacyTx(result.toString());
+        QMessageBox::information(this, tr("提示"), tr("转账成功，等区块链确认后，手动点击刷新按钮!"));
     } else if (ID_GetPrivacyTxByAddr == m_nID) {
         QList<QVariant> txList = (resultMap["txDetails"]).toList();
         model->RemoveALLEntry();
@@ -241,6 +259,8 @@ void PrivacyUi::PostMsgGetPrivacyBalance(const QString &addr)
     QJsonObject jsonParms;
     jsonParms.insert("addr", addr);
     jsonParms.insert("token", CStyleConfig::GetInstance().GetUnitName());
+    jsonParms.insert("displaymode", 1);
+    jsonParms.insert("assetExec", "coins");
     QJsonArray params;
     params.insert(0, jsonParms);
     PostJsonMessage(ID_ShowPrivacyAccountInfo, params);
@@ -264,24 +284,26 @@ void PrivacyUi::PostMsgPrivacyListTxs()
 // 构建交易
 void PrivacyUi::PostMsgCreatePrivacyTx(const QString &fromAddr, const QString &toAddr, double amount, const QString &note)
 {
-    // type:1 公对私转账, 2 私对私转账, 3 私到公转账
+    // type:101 公对私转账, 102 私对私转账, 103 私到公转账
     int type = 0;
     if(!IsAddrValid(fromAddr.toStdString().c_str()) && !IsAddrValid(toAddr.toStdString().c_str())) {
-        type = 2;
+        type = 102;
     } else if (!IsAddrValid(fromAddr.toStdString().c_str())) {
-        type = 3;
+        type = 103;
     } else if (!IsAddrValid(toAddr.toStdString().c_str())) {
-        type = 1;
+        type = 101;
     } else {
         QMessageBox::information(this, tr("提示"), tr("地址输入有误, 必须有隐私地址!"));
         return;
     }
 
     QJsonObject jsonParms;
-    jsonParms.insert("type", type);
+    jsonParms.insert("actionType", type);
     jsonParms.insert("from", fromAddr);
     jsonParms.insert("amount", amount*le8);
-    if (type == 3) {
+    jsonParms.insert("tokenname", CStyleConfig::GetInstance().GetUnitName());
+    jsonParms.insert("assetExec", "coins");
+    if (type == 103) {
         jsonParms.insert("to", toAddr);
     } else {
         jsonParms.insert("pubkeypair", toAddr);
@@ -349,12 +371,20 @@ void PrivacyUi::on_copyBtn_clicked()
 
 void PrivacyUi::on_rollInBtn_clicked()
 {
+    if(m_strSelectedAddr.isEmpty()){
+        QMessageBox::information(this, tr("提示"), tr("请先选择公开地址!"));
+        return;
+    }
     SendToContractDialog dlg(m_strSelectedAddr, m_coinsBalance, ContractRollIn, this);
     dlg.exec();
 }
 
 void PrivacyUi::on_rollOutBtn_clicked()
 {
+    if(m_strSelectedAddr.isEmpty()){
+        QMessageBox::information(this, tr("提示"), tr("请先选择公开地址!"));
+        return;
+    }
     SendToContractDialog dlg(m_strSelectedAddr, m_contractBalance, ContractRollOut, this);
     dlg.exec();
 }
@@ -429,5 +459,4 @@ void PrivacyUi::on_nextPageBtn_clicked()
     PostMsgPrivacyListTxs();
 
     ui->prevPageBtn->setEnabled(true);
-
 }

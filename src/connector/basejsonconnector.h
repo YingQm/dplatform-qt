@@ -34,6 +34,7 @@ enum IdType{
     ID_SetTxFee,
     ID_SendToAddress,
     ID_ImportPrivKey,
+    ID_DumpPrivkey,
     ID_WalletTxList,
     ID_GetMemPool,
     ID_SendTransaction,
