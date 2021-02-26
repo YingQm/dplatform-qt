@@ -7,6 +7,7 @@
 #include "base58.h"
 #include "sendtocontractdialog.h"
 #include "transactionslistmodel.h"
+#include "transactiondescdialog.h"
 #include "mainui.h"
 
 extern MainUI*              g_lpMainUI;
@@ -171,20 +172,20 @@ void PrivacyUi::requestFinished(const QVariant &result, const QString &error)
         PostMsgSendPrivacyTx(result.toString());
         QMessageBox::information(this, tr("提示"), tr("转账成功，等区块链确认后，手动点击刷新按钮!"));
     } else if (ID_GetPrivacyTxByAddr == m_nID) {
-        QList<QVariant> txList = (resultMap["txDetails"]).toList();
+        QList<QVariant> txList = resultMap["txDetails"].toList();
         model->RemoveALLEntry();
         QString strFromFirst;
         QString strFromEnd;
         for (int i = 0; i<txList.size(); ++i) {
             QMap<QString, QVariant> txMap = txList[i].toMap();
-            double dAmount = txMap["amount"].toDouble();
+            QString strExecer = txMap["tx"].toMap()["execer"].toString();
+            QString strActionname = txMap["actionName"].toString();
+            double dAmount = txMap["tx"].toMap()["payload"].toMap()[strActionname.toLower()].toMap()["amount"].toDouble();
             QString strToAddr = txMap["tx"].toMap()["to"].toString();
             QString strFromAddr = txMap["fromAddr"].toString();
             QString strTxHash = txMap["txHash"].toString();
             uint nTime = txMap["blockTime"].toUInt();
             int nFee = txMap["tx"].toMap()["fee"].toUInt();
-            QString strExecer = txMap["tx"].toMap()["execer"].toString();
-            QString strActionname = txMap["actionName"].toString();
             int nTy = txMap["receipt"].toMap()["ty"].toInt();
             QString strNote = txMap["tx"].toMap()["payload"].toMap()["Value"].toMap()["Transfer"].toMap()["note"].toString();
 
@@ -197,6 +198,12 @@ void PrivacyUi::requestFinished(const QVariant &result, const QString &error)
                         break;
                     }
                 }
+            }
+
+            if (ui->typeWidget->currentData().toInt() == 1) { // 接收方
+                QString strTemp = strToAddr;
+                strToAddr = strFromAddr;
+                strFromAddr = strTemp;
             }
 
             model->AdddateEntry(TransactionsListEntry(nTime, strToAddr, strFromAddr, strTxHash, dAmount, nFee, strExecer, strActionname, nTy, strNote, strError));
@@ -480,4 +487,10 @@ void PrivacyUi::on_nextPageBtn_clicked()
     PostMsgPrivacyListTxs();
 
     ui->prevPageBtn->setEnabled(true);
+}
+
+void PrivacyUi::on_listTransactions_doubleClicked(const QModelIndex &index)
+{
+    TransactionDescDialog dlg(index, this);
+    dlg.exec();
 }

@@ -58,6 +58,8 @@ private slots:
     void on_prevPageBtn_clicked();
     void on_nextPageBtn_clicked();
 
+    void on_listTransactions_doubleClicked(const QModelIndex &index);
+
 private:
     Ui::PrivacyUi *ui;
     const PlatformStyle *m_platformStyle;
