@@ -135,7 +135,8 @@ HEADERS  += \
     src/connector/clearthread.h \
     src/connector/cstyleconfig.h \
     src/privacyui/privacyui.h \
-    src/privacyui/sendtocontractdialog.h
+    src/privacyui/sendtocontractdialog.h \
+    src/functionui/base64.h
 
 greaterThan(QT_MAJOR_VERSION, 4) {
     HEADERS += src/menu/receiverequestdialog.h \

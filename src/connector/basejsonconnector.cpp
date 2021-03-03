@@ -71,6 +71,7 @@ void InitMethodMap()
     g_methodMap.insert(ID_ShowPrivacyKey, "privacy.ShowPrivacyKey");
     g_methodMap.insert(ID_PrivacyCreateRawTransaction, "privacy.CreateRawTransaction");
     g_methodMap.insert(ID_ShowPrivacyAccountInfo, "privacy.ShowPrivacyAccountInfo");
+    g_methodMap.insert(ID_ShowPrivacyAccountInfo2, "privacy.ShowPrivacyAccountInfo");
     g_methodMap.insert(ID_ShowPrivacyAccountSpend, "privacy.ShowPrivacyAccountSpend");
     g_methodMap.insert(ID_GetPrivacyTxByAddr, "privacy.GetPrivacyTxByAddr");
 }

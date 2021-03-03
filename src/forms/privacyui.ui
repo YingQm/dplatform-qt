@@ -1046,6 +1046,20 @@
                     <item>
                      <widget class="QLineEdit" name="payAmount"/>
                     </item>
+                    <item>
+                     <widget class="QLabel" name="usableAmountLabel">
+                      <property name="text">
+                       <string>公用可用:0 </string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="usablePrivacyLabel">
+                      <property name="text">
+                       <string>隐私可用用:0</string>
+                      </property>
+                     </widget>
+                    </item>
                    </layout>
                   </widget>
                  </item>

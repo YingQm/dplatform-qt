@@ -21,6 +21,7 @@ public:
 
 private:
     void initUI();
+    void initUnitNameUI();
 
 protected:
     virtual void requestFinished(const QVariant &result, const QString &error);
@@ -30,12 +31,13 @@ private:
     void PostMsgShowPrivacyKey(const QString &addr);
     void PostMsgGetCoinsBalance(const QString &addr);
     void PostMsgGetContractBalance(const QString &addr);
-    void PostMsgGetPrivacyBalance(const QString &addr);
+    void PostMsgGetPrivacyBalance(const QString &addr, IdType id);
     void PostMsgPrivacyListTxs();
     void PostMsgCreatePrivacyTx(const QString &fromAddr, const QString &toAddr, double amount, const QString &note, int type);
     void PostMsgSignPrivacyTx(const QString &privkey, const QString &txHex);
     void PostMsgSendPrivacyTx(const QString &signHex);
 
+    void refresh();
 private slots:
     // wallet
     void on_refreshBtn_clicked();
@@ -57,7 +59,6 @@ private slots:
     void on_firstPageBtn_clicked();
     void on_prevPageBtn_clicked();
     void on_nextPageBtn_clicked();
-
     void on_listTransactions_doubleClicked(const QModelIndex &index);
 
 private:

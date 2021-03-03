@@ -79,6 +79,7 @@ enum IdType{
     ID_ShowPrivacyKey,
     ID_PrivacyCreateRawTransaction,
     ID_ShowPrivacyAccountInfo,
+    ID_ShowPrivacyAccountInfo2,
     ID_ShowPrivacyAccountSpend,
     ID_GetPrivacyTxByAddr
 };
