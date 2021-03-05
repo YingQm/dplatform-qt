@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="en">
 <context>
@@ -188,15 +188,23 @@
     </message>
     <message>
         <source>隐藏地址失败,%1</source>
-        <translation type="unfinished">Failed to conceal address, %1 </translation>
+        <translation type="obsolete">Failed to conceal address, %1 </translation>
     </message>
     <message>
         <source>隐藏地址成功</source>
-        <translation type="unfinished">Conceal address successfully</translation>
+        <translation type="obsolete">Conceal address successfully</translation>
     </message>
     <message>
         <source>airdropaddr 地址不能设置为挖矿地址!</source>
         <translation type="obsolete">Airdropaddr address cannot be set to mine address!</translation>
+    </message>
+    <message>
+        <source>设置地址失败,%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>设置地址成功</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1027,6 +1035,10 @@ ONLY the third party wallet deposit supported, please use transfer-in and transf
         <source>%1钱包-测试版 %2</source>
         <translation type="unfinished">%1-test-%2</translation>
     </message>
+    <message>
+        <source>隐私交易</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ManageUI</name>
@@ -1146,6 +1158,225 @@ ONLY the third party wallet deposit supported, please use transfer-in and transf
     </message>
     <message>
         <source>授权数量: </source>
+        <translation type="unfinished">Authorization number:</translation>
+    </message>
+</context>
+<context>
+    <name>PrivacyUi</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>钱包</source>
+        <translation type="unfinished">wallet</translation>
+    </message>
+    <message>
+        <source>刷新</source>
+        <translation type="unfinished">refresh</translation>
+    </message>
+    <message>
+        <source>公开地址: </source>
+        <translation type="unfinished">Public address:</translation>
+    </message>
+    <message>
+        <source>合约充值</source>
+        <translation type="unfinished">Contract in</translation>
+    </message>
+    <message>
+        <source>隐私地址: </source>
+        <translation type="unfinished">Private address</translation>
+    </message>
+    <message>
+        <source>复制</source>
+        <translation type="obsolete">copy</translation>
+    </message>
+    <message>
+        <source>合约转出</source>
+        <translation type="unfinished">Contract out</translation>
+    </message>
+    <message>
+        <source>公开地址余额</source>
+        <translation type="unfinished">public balance</translation>
+    </message>
+    <message>
+        <source>合约地址余额</source>
+        <translation type="unfinished">Contract balance</translation>
+    </message>
+    <message>
+        <source>隐私地址余额</source>
+        <translation type="unfinished">Private balance</translation>
+    </message>
+    <message>
+        <source>发送</source>
+        <translation type="unfinished">send</translation>
+    </message>
+    <message>
+        <source>手续费 %1 %2</source>
+        <translation type="unfinished">Fee %1 %2</translation>
+    </message>
+    <message>
+        <source>来源: </source>
+        <translation type="unfinished">From:</translation>
+    </message>
+    <message>
+        <source>付给: </source>
+        <translation type="unfinished">To:</translation>
+    </message>
+    <message>
+        <source>Choose address from address book</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>备注: </source>
+        <translation type="unfinished">Note:</translation>
+    </message>
+    <message>
+        <source>金额: </source>
+        <translation type="unfinished">Amount:</translation>
+    </message>
+    <message>
+        <source>公用可用:0 </source>
+        <translation type="unfinished">Public available:</translation>
+    </message>
+    <message>
+        <source>清除所有</source>
+        <translation type="unfinished">clear all</translation>
+    </message>
+    <message>
+        <source>公对私发送</source>
+        <translation type="unfinished">Public-to-private</translation>
+    </message>
+    <message>
+        <source>私对私发送</source>
+        <translation type="unfinished">Private-to-private</translation>
+    </message>
+    <message>
+        <source>私对公发送</source>
+        <translation type="unfinished">Private-to-public</translation>
+    </message>
+    <message>
+        <source>交易记录</source>
+        <translation type="unfinished">transaction record</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>首页</source>
+        <translation type="unfinished">home</translation>
+    </message>
+    <message>
+        <source>&lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>请选择公开地址</source>
+        <translation type="unfinished">Please select a public address</translation>
+    </message>
+    <message>
+        <source>请选择发送方公开地址</source>
+        <translation type="obsolete">Please select the sender public address</translation>
+    </message>
+    <message>
+        <source>请输入收款方公开地址或者隐私地址</source>
+        <translation type="unfinished">Please enter the public address or private address of the recipient</translation>
+    </message>
+    <message>
+        <source>请输入发送交易的备注信息</source>
+        <translation type="unfinished">Please enter note information for sending the transaction</translation>
+    </message>
+    <message>
+        <source>请输入交易的金额,必须是整数</source>
+        <translation type="unfinished">Please enter the transaction amount. It must be a whole number</translation>
+    </message>
+    <message>
+        <source>公开地址余额 (%1)</source>
+        <translation type="unfinished">Public balance (%1)</translation>
+    </message>
+    <message>
+        <source>合约地址余额 (%1)</source>
+        <translation type="unfinished">Contract balance (%1)</translation>
+    </message>
+    <message>
+        <source>隐私地址余额 (%1)</source>
+        <translation type="unfinished">Privacy balance (%1)</translation>
+    </message>
+    <message>
+        <source>公对私交易手续费仅 %1 </source>
+        <translation type="unfinished">Public-to-private fees only %1 </translation>
+    </message>
+    <message>
+        <source>%1, 其他交易手续费需要 1 %1</source>
+        <translation type="unfinished">%1, other transaction fees need 1%</translation>
+    </message>
+    <message>
+        <source>提示</source>
+        <translation type="unfinished">note</translation>
+    </message>
+    <message>
+        <source>获取隐私地址失败, %1</source>
+        <translation type="unfinished">Failed to get private address, %1</translation>
+    </message>
+    <message>
+        <source>公用可用:%1 </source>
+        <translation type="unfinished">Public availability:%1 </translation>
+    </message>
+    <message>
+        <source>隐私可用:%1</source>
+        <translation type="unfinished">Privacy available:%1</translation>
+    </message>
+    <message>
+        <source>发送交易失败, %1</source>
+        <translation type="unfinished">Send transaction failed, %1</translation>
+    </message>
+    <message>
+        <source>转账成功，等区块链确认后，手动点击刷新按钮!</source>
+        <translation type="unfinished">The transfer is successful, and click the refresh button manually after the confirmation of the blockchain!</translation>
+    </message>
+    <message>
+        <source>请先选择公开地址!</source>
+        <translation type="unfinished">Please select a public address first!</translation>
+    </message>
+    <message>
+        <source>金额不能为空!</source>
+        <translation type="unfinished">Amount cannot be empty!</translation>
+    </message>
+    <message>
+        <source>收款方隐私地址输入有误!</source>
+        <translation type="unfinished">Receiver privacy address incorrectly!</translation>
+    </message>
+    <message>
+        <source>收款方公开地址输入有误!</source>
+        <translation type="unfinished">Receiver public address input error!</translation>
+    </message>
+    <message>
+        <source>隐私可用:0</source>
+        <translation type="unfinished">Privacy available:0</translation>
+    </message>
+    <message>
+        <source>选择公开地址</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>选择发送方地址</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>选择收款方公开地址</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>复制隐私地址</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>请选择发送方地址</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1270,6 +1501,73 @@ Only the third-party wallet can be used to charge money to the wallet, and the a
     <message>
         <source>%1钱包</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SendToContractDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>请确认钱包已经解锁！</source>
+        <translation type="unfinished">Please confirm that the wallet has been unlocked!</translation>
+    </message>
+    <message>
+        <source>充值地址</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>充值金额</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>全部</source>
+        <translation type="unfinished">all</translation>
+    </message>
+    <message>
+        <source>可充值:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished">1 billion {0?}</translation>
+    </message>
+    <message>
+        <source>确定</source>
+        <translation type="unfinished">ok</translation>
+    </message>
+    <message>
+        <source>关闭</source>
+        <translation type="unfinished">close</translation>
+    </message>
+    <message>
+        <source>合约充值</source>
+        <translation type="unfinished">Contract in</translation>
+    </message>
+    <message>
+        <source>合约转出</source>
+        <translation type="unfinished">Contract out</translation>
+    </message>
+    <message>
+        <source>转出地址</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>转出金额</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>可转出:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>提示</source>
+        <translation type="unfinished">note</translation>
+    </message>
+    <message>
+        <source>转账成功，等区块链确认后，手动点击刷新按钮!</source>
+        <translation type="unfinished">The transfer is successful, and click the refresh button manually after the confirmation of the blockchain!</translation>
     </message>
 </context>
 <context>
@@ -1967,6 +2265,14 @@ Only the third-party wallet can be used to charge money to the wallet, and the a
     </message>
     <message>
         <source>&lt;b&gt;%1 %2&lt;/b&gt; to %3 (%4)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>选择发送方地址</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>选择收款方地址</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

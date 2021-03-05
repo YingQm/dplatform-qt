@@ -19,7 +19,7 @@ TxViewItemDelegate::TxViewItemDelegate(TypeList typeList, const PlatformStyle *p
     m_RedColor = 0xec5151;
     m_GreyColor = 0x999999;
 
-    if(CStyleConfig::GetInstance().GetStyleType() == QSS_BLUE){
+    if(CStyleConfig::GetInstance().GetStyleType() == QSS_BLUE) {
         m_YellowColor = 0x2c77ef;
         m_BlackColor = 0x1a1a38;
         m_WhiteColor = 0x3D3D3D;
@@ -40,24 +40,19 @@ void TxViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     QRect addressRect(mainRect.left() + MARGIN_x_y-2, mainRect.top()+MARGIN_x_y+halfheight+SPACE_ITEM, mainRect.width() - MARGIN_x_y, halfheight);
 
     QString strDecoration;
-    if (m_nTypeList == TransactionList)
-    {
+    if (m_nTypeList == TransactionList) {
         strDecoration = index.data(TyItem_TimeData).toString();
-    }
-    else if (TYPERECEIVEING == index.data(TypeRole).toString())
-    {
+    } else if (TYPERECEIVEING == index.data(TypeRole).toString()) {
         double dBalance = index.data(Item_Balance).toDouble();
         QString strBalance = QString::number(dBalance, 'f', 4);
-        if(!strBalance.isEmpty())
-        {
+        if(!strBalance.isEmpty()) {
             strBalance = tr("可用") + CStyleConfig::GetInstance().GetUnitName() + ": " +strBalance;
         }
 
         strDecoration = strBalance;
     }
 
-    if(!strDecoration.isEmpty())
-    {
+    if(!strDecoration.isEmpty()) {
         QFont font;
 #ifndef WIN32
         font.setPointSize(10);
@@ -73,37 +68,28 @@ void TxViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
         painter->setFont(font);
     }
 
-    if (m_nTypeList == TransactionList)
-    {
+    if (m_nTypeList == TransactionList) {
         QString label = index.data(TyItem_ToLabel).toString();
         QString address = index.data(TyItem_ToAddress).toString();
-        if(SendToAddress == index.data(TyItem_TypeTy).toInt() || SendToMining == index.data(TyItem_TypeTy).toInt())
-        {
+        if(SendToAddress == index.data(TyItem_TypeTy).toInt() || SendToMining == index.data(TyItem_TypeTy).toInt()) {
             label = index.data(TyItem_FromLabel).toString();
             address = index.data(TyItem_FromAddress).toString();
         }
 
         painter->setPen(m_GreyColor);
-        if(label.isEmpty())
-        {
+        if(label.isEmpty()) {
             painter->drawText(addressRect, Qt::AlignLeft|Qt::AlignVCenter, address);
-        }
-        else
-        {
+        } else {
             painter->drawText(addressRect, Qt::AlignLeft|Qt::AlignVCenter, label + "--" + address);
         }
 
-        if(Generated == index.data(TyItem_TypeTy).toInt() || RecvWithAddress == index.data(TyItem_TypeTy).toInt() || RecvFromMining == index.data(TyItem_TypeTy).toInt())
-        {
+        if(Generated == index.data(TyItem_TypeTy).toInt() || RecvWithAddress == index.data(TyItem_TypeTy).toInt() || RecvFromMining == index.data(TyItem_TypeTy).toInt()) {
             painter->setPen(m_WhiteColor);
-        }
-        else
-        {
+        } else {
             painter->setPen(m_YellowColor);
         }
 
-        if(TyFailure == index.data(TyItem_TypeTy).toInt())
-        {
+        if(TyFailure == index.data(TyItem_TypeTy).toInt()) {
             painter->setPen(m_RedColor);
         }
 
@@ -112,19 +98,14 @@ void TxViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 
         QRect typeRect(mainRect.left()+200 + MARGIN_x_y, mainRect.top()+MARGIN_x_y, mainRect.width() - MARGIN_x_y, halfheight);
 
-        if(TyFailure == index.data(TyItem_TypeTy).toInt())
-        {
+        if(TyFailure == index.data(TyItem_TypeTy).toInt()) {
             painter->setPen(m_RedColor);
-        }
-        else
-        {
+        } else {
             painter->setPen(m_YellowColor);
         }
         QString typeTy = index.data(TyItem_StrTypeTy).toString();
         painter->drawText(typeRect, Qt::AlignLeft|Qt::AlignVCenter, typeTy);
-    }
-    else
-    {
+    } else {
         painter->setPen(m_GreyColor);
         QString address = index.data(Item_Address).toString();
         painter->drawText(addressRect, Qt::AlignLeft|Qt::AlignVCenter, address);

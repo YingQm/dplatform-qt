@@ -405,6 +405,7 @@ void StatusBarUI::requestFinished(const QVariant &result, const QString &error)
         QList<QVariant> tokensList = (resultMap["tokenAssets"]).toList();
         for(int i=0; i<tokensList.size(); ++i)
         {
+            // 如果之前 token 合约中还有钱 就转出来
             qint64 nBalance = qint64(tokensList[i].toMap()["account"].toMap()["balance"].toDouble());
             if(nBalance > 0)
             {
@@ -625,7 +626,8 @@ void StatusBarUI::SendToTrade(const QString &strAddr, const QString &strSymbol, 
     QJsonObject jsonParms;
     jsonParms.insert("from", strAddr);
     jsonParms.insert("to", "1BXvgjmBw1aBgmGn1hjfGyRkmN3krWpFP4");
-    jsonParms.insert("amount", nBalance);
+    qint64 lamount = (qint64)(nBalance*le8);
+    jsonParms.insert("amount", lamount);
     jsonParms.insert("note", "test");
 
     if(strSymbol != CStyleConfig::GetInstance().GetUnitName())

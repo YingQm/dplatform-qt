@@ -91,7 +91,8 @@
         <file alias="zh_CN">locale/bitcoin_zh_CN.qm</file>
     </qresource>
     <qresource prefix="/">
-        <file alias="address_book">res/icons/address_book.png</file>
+    <file alias="address_book">res/icons/address_book.png</file>
+    <file alias="copy">res/icons/copy.png</file>
         <file>res/icons/search.png</file>
         <file>res/icons/selected.png</file>
         <file alias="qss_yellow">res/qss_yellow.qss</file>

@@ -111,6 +111,7 @@ QProgressBar::chunk {
 QToolButton {
     background-color: #E7EDF1;
     border-radius: 4px;
+    color: #2c77ef;
     border: none;
     height: 20px;
 }
@@ -266,23 +267,23 @@ QRadioButton::indicator:unchecked {
     image: url(:/icons/blue_radio_unchecked);
 }
 
-QFrame#line1px, QFrame#line_2_1px { background-color: #E7EDF1; height: 1px; }
+QFrame#line1px, QFrame#line_2_1px, QFrame#line1_1px, QFrame#line_1_1px { background-color: #E7EDF1; height: 1px; }
 
-QWidget#sendwidget1_0, QWidget#sendwidget1_1, QWidget#sendwidget1_2, QWidget#sendwidget1_3 {
+QWidget#sendwidget1_0, QWidget#sendwidget1_1, QWidget#sendwidget1_2, QWidget#sendwidget1_3, QWidget#sendwidget1_4, QWidget#selectWidget, QWidget#selectWidget_1 {
     background-color:#F5F4F9;
     border-radius: 4px;
 }
 
 QLabel { background: transparent; }
 
-QLineEdit#fromAddr, QLineEdit#payTo, QLineEdit#addAsLabel{
+QLineEdit#fromAddr, QLineEdit#payTo, QLineEdit#addAsLabel, QLineEdit#PrivacyAddrEdit{
     background-color: #F5F4F9;
     border-radius: 4px;
     border: none;
     height: 20px;
 }
 
-QLineEdit:!enabled#fromAddr { background: #EBECEF; }
+QLineEdit:!enabled#fromAddr, QLineEdit:!enabled#addrEdit { background: #EBECEF; }
 
 QWidget#Widget_bk_main {
     border-image:url(:/icons/bk_seed);
@@ -306,4 +307,32 @@ QCheckBox#stakingCheckBox {
 }
 
 QStatusBar{background-color: #FFFFFF;}
+
+QToolButton#refreshBtn {
+    background: transparent;
+    color: #2c77ef;
+    border-radius: 4px;
+    border: none;
+    height: 20px;
+}
+
+QWidget#PrivacyUIWidget {
+    border-image:url(:/icons/bk_seed);
+}
+
+QWidget#privacyWalletWidget, QWidget#privacySendWidget, QWidget#privacyTxsWidget {background:#FFFFFF;border-radius: 4px;}
+
+QComboBox {
+    border: none;
+    border-radius: 4px;
+    background-color: #2c77ef;
+    color:#ffffff;
+}
+
+QComboBox QAbstractItemView
+{
+    border: 1px solid #5282DB;
+    background-color:#E7EDF1;
+    selection-background-color: #2c77ef;
+}
 

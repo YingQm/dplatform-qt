@@ -38,17 +38,19 @@ void PrivacyUi::initUI()
     // wallet
     ui->sendWidget->setStyleSheet(CStyleConfig::GetInstance().GetStylesheet_child2());
     if (CStyleConfig::GetInstance().GetStyleType() == QSS_BLUE) {
-        this->setStyleSheet("QWidget {background-color:#FFFFFF;border:none;}" + CStyleConfig::GetInstance().GetStylesheet());
         ui->sendwidget1_3->setStyleSheet("QWidget {background-color:#F5F4F9;border-radius: 4px;}");
-    }
-    else {
+        ui->line1px->setStyleSheet("QFrame{ background-color: #C5CBD0; height: 1px; }");
+        ui->line_2_1px->setStyleSheet("QFrame{ background-color: #C5CBD0; height: 1px; }");
+        ui->line1_1px->setStyleSheet("QFrame{ background-color: #C5CBD0; height: 1px; }");
+        ui->line_1_1px->setStyleSheet("QFrame{ background-color: #C5CBD0; height: 1px; }");
+    } else {
         ui->sendwidget1_3->setStyleSheet("QWidget {background-color:#2c2c2c;border-radius: 4px;}");
     }
     ui->addrEdit->setPlaceholderText(tr("请选择公开地址"));
     ui->addrEdit->setToolTip(tr("请选择公开地址"));
     ui->addrEdit->setEnabled(false);
     ui->refreshBtn->setStyleSheet("QToolButton {background-color: transparent; }");
-    ui->copyBtn->setStyleSheet("QToolButton {background-color: transparent; }");
+   // ui->copyBtn->setStyleSheet("QToolButton {background-color: transparent; }");
 
 #ifndef MAC_OSX
     ui->labelBalance->setStyleSheet("QLabel { font: " + QString::number(GetBaseFontSize() + 2) + "pt;}");
@@ -63,9 +65,14 @@ void PrivacyUi::initUI()
     ui->addressFromButton->setIcon(m_platformStyle->SingleColorIcon(":/address_book"));
     ui->addressBookButton->setIcon(m_platformStyle->SingleColorIcon(":/address_book"));
     ui->selectBtn->setIcon(m_platformStyle->SingleColorIcon(":/address_book"));
-    ui->payAmount->setValidator(new QIntValidator(0, pow(10, 10), this));
-    ui->fromAddr->setPlaceholderText(tr("请选择发送方公开地址"));
-    ui->fromAddr->setToolTip(tr("请选择发送方公开地址"));
+    ui->copyAddrBtn->setIcon(m_platformStyle->SingleColorIcon(":/copy"));
+    ui->selectBtn->setToolTip(tr("选择公开地址"));
+    ui->addressFromButton->setToolTip(tr("选择发送方地址"));
+    ui->addressBookButton->setToolTip(tr("选择收款方公开地址"));
+    ui->copyAddrBtn->setToolTip(tr("复制隐私地址"));
+    ui->payAmount->setValidator(new QIntValidator(0, qint64(pow(10, 10)), this));
+    ui->fromAddr->setPlaceholderText(tr("请选择发送方地址"));
+    ui->fromAddr->setToolTip(tr("请选择发送方地址"));
     ui->fromAddr->setEnabled(false);
     ui->payTo->setPlaceholderText(tr("请输入收款方公开地址或者隐私地址"));
     ui->payTo->setToolTip(tr("请输入收款方公开地址或者隐私地址"));
@@ -103,8 +110,9 @@ void PrivacyUi::initUI()
 
     if (CStyleConfig::GetInstance().GetUnitName() == ""){
         PostJsonMessage(ID_GetCoinSymbol);
+    } else {
+        initUnitNameUI();
     }
-    initUnitNameUI();
 }
 
 void PrivacyUi::initUnitNameUI()
@@ -138,7 +146,7 @@ void PrivacyUi::requestFinished(const QVariant &result, const QString &error)
         QMessageBox::information(this, tr("提示"), tr("获取隐私地址失败, %1").arg(error));
     } else if (ID_ShowPrivacyKey == m_nID) {
         if (!resultMap["pubkeypair"].toString().isEmpty()) {
-            ui->PrivacyAddrLabel->setText(resultMap["pubkeypair"].toString());
+            ui->PrivacyAddrEdit->setText(resultMap["pubkeypair"].toString());
         } else {
             QMessageBox::information(this, tr("提示"), tr("获取隐私地址失败, %1").arg(error));
         }
@@ -333,10 +341,10 @@ void PrivacyUi::PostMsgPrivacyListTxs()
 void PrivacyUi::PostMsgCreatePrivacyTx(const QString &fromAddr, const QString &toAddr, double amount, const QString &note, int type)
 {
     // type:101 公对私转账, 102 私对私转账, 103 私到公转账
-    qint64 lamount = (qint64)(amount*le8);
     QJsonObject jsonParms;
     jsonParms.insert("actionType", type);
     jsonParms.insert("from", fromAddr);
+    qint64 lamount = (qint64)(amount*le8);
     jsonParms.insert("amount", lamount);
     jsonParms.insert("tokenname", CStyleConfig::GetInstance().GetUnitName());
     jsonParms.insert("assetExec", "coins");
@@ -419,9 +427,9 @@ void PrivacyUi::on_selectBtn_clicked()
     }
 }
 
-void PrivacyUi::on_copyBtn_clicked()
+void PrivacyUi::on_copyAddrBtn_clicked()
 {
-    GUIUtil::setClipboard(ui->PrivacyAddrLabel->text());
+    GUIUtil::setClipboard(ui->PrivacyAddrEdit->text());
 }
 
 void PrivacyUi::on_rollInBtn_clicked()

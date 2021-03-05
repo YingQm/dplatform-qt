@@ -42,7 +42,7 @@ private slots:
     // wallet
     void on_refreshBtn_clicked();
     void on_selectBtn_clicked();
-    void on_copyBtn_clicked();
+    void on_copyAddrBtn_clicked();
     void on_rollInBtn_clicked();
     void on_rollOutBtn_clicked();
 

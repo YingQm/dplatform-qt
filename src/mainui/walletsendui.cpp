@@ -187,6 +187,8 @@ void WalletSendUI::initUI()
 
 	ui->addressFromButton->setIcon(m_platformStyle->SingleColorIcon(":/address_book"));
 	ui->addressBookButton->setIcon(m_platformStyle->SingleColorIcon(":/address_book"));
+    ui->addressFromButton->setToolTip(tr("选择发送方地址"));
+    ui->addressBookButton->setToolTip(tr("选择收款方地址"));
 }
 
 void WalletSendUI::SetUpProperty(double dBalance, double dFrozen)

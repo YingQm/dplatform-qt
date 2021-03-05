@@ -62,7 +62,8 @@ void SendToContractDialog::PostMsgSendPrivacyConvert(const QString &fromAddr, co
     QJsonObject jsonParms;
     jsonParms.insert("from", fromAddr);
     jsonParms.insert("to", toAddr);
-    jsonParms.insert("amount", amount*le8);
+    qint64 lamount = (qint64)(amount*le8);
+    jsonParms.insert("amount", lamount);
     QJsonArray params;
     params.insert(0, jsonParms);
     PostJsonMessage(ID_SendToAddress, params);
@@ -94,7 +95,8 @@ void SendToContractDialog::requestFinished(const QVariant &result, const QString
         m_strAddrPrivkey = resultMap["data"].toString();
         QJsonObject jsonParms;
         jsonParms.insert("from", m_strAddr);
-        jsonParms.insert("amount", ui->toAmountEdit->text().toDouble()*le8);
+        qint64 lamount = (qint64)(ui->toAmountEdit->text().toDouble()*le8);
+        jsonParms.insert("amount", lamount);
         jsonParms.insert("to", g_strConvertExectoAddr);
         jsonParms.insert("isWithdraw", true);
         jsonParms.insert("execName", "coins");
