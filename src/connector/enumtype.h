@@ -23,6 +23,7 @@
 #define lem7 0.000001
 #define lem10 0.0000000001
 #define COUNT_NUM   15      // 交易列表默认显示个数
+#define NEWACCOUNT_COUNT 5  // 导入助记词的时候，默认新增的地址个数
 
 /** General change type (added, updated, removed). */
 enum ChangeType

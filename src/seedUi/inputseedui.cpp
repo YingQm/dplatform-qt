@@ -155,15 +155,13 @@ void InputSeedUi::requestFinished(const QVariant &result, const QString &error)
         } else {
             if(InputSeed_Tab == m_nTab) {
                 m_nCount = 0;
-                for(int i=0; i<5; ++i)
+                for(int i=0; i<NEWACCOUNT_COUNT; ++i)
                 {
-              //      PostJsonMessage(ID_NewAccount, "label=" + tr("标签") + QString::number(i+1, 10));
                     std::stringstream ostr;
                     ostr << "{\"label\":\"" << tr("标签").toStdString().c_str() << i+1 << "\"}";
                     PostJsonMessage(ID_NewAccount, ostr.str().c_str());
                 }
             } else {
-             //   PostJsonMessage(ID_NewAccount, "label=" + tr("标签") + QString::number(1, 10));
                 std::stringstream ostr;
                 ostr << "{\"label\":\"" << tr("标签").toStdString().c_str() << 1 << "\"}";
                 PostJsonMessage(ID_NewAccount, ostr.str().c_str());
@@ -187,7 +185,7 @@ void InputSeedUi::requestFinished(const QVariant &result, const QString &error)
 
         if(InputSeed_Tab == m_nTab) {
             ++ m_nCount;
-            if( m_nCount >= 5)
+            if( m_nCount >= NEWACCOUNT_COUNT)
                 PostJsonMessage(ID_Lock);
         } else {
             PostJsonMessage(ID_Lock);
