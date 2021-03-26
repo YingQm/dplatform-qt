@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="en">
 <context>
@@ -1277,7 +1277,7 @@ ONLY the third party wallet deposit supported, please use transfer-in and transf
     </message>
     <message>
         <source>请选择公开地址</source>
-        <translation type="unfinished">Please select a public address</translation>
+        <translation type="obsolete">Please select a public address</translation>
     </message>
     <message>
         <source>请选择发送方公开地址</source>
@@ -1360,24 +1360,32 @@ ONLY the third party wallet deposit supported, please use transfer-in and transf
         <translation type="unfinished">Privacy available:0</translation>
     </message>
     <message>
-        <source>选择公开地址</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>选择发送方地址</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>选择收款方公开地址</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Select the recipient's public address</translation>
     </message>
     <message>
         <source>复制隐私地址</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Copy private address</translation>
     </message>
     <message>
         <source>请选择发送方地址</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Please select the sender address</translation>
+    </message>
+    <message>
+        <source>地址必须已经开启隐私功能,否则会查询不到</source>
+        <translation type="unfinished">The address must have privacy enabled, otherwise it will not be queried</translation>
+    </message>
+    <message>
+        <source>请选择公开地址,并开启隐私功能</source>
+        <translation type="unfinished">Please select the public address and enable privacy function</translation>
+    </message>
+    <message>
+        <source>选择公开地址,并开启隐私功能</source>
+        <translation type="unfinished">Please select the public address and enable privacy function</translation>
     </message>
 </context>
 <context>

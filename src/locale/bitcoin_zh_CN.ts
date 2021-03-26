@@ -1633,8 +1633,8 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+96"/>
-        <location line="+6"/>
+        <location line="+95"/>
+        <location line="+5"/>
         <source>标签</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2488,6 +2488,11 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     </message>
     <message>
         <location line="+65"/>
+        <source>地址必须已经开启隐私功能,否则会查询不到</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>交易记录</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2514,12 +2519,12 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     <message>
         <location filename="../privacyui/privacyui.cpp" line="+49"/>
         <location line="+1"/>
-        <source>请选择公开地址</source>
+        <source>请选择公开地址,并开启隐私功能</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+19"/>
-        <source>选择公开地址</source>
+        <location line="+18"/>
+        <source>选择公开地址,并开启隐私功能</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2592,7 +2597,7 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
         <location line="+38"/>
         <location line="+14"/>
         <location line="+4"/>
-        <location line="+198"/>
+        <location line="+196"/>
         <location line="+33"/>
         <location line="+10"/>
         <location line="+38"/>
@@ -2605,7 +2610,7 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-375"/>
+        <location line="-373"/>
         <location line="+5"/>
         <source>获取隐私地址失败, %1</source>
         <translation type="unfinished"></translation>
@@ -2632,7 +2637,7 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+198"/>
+        <location line="+196"/>
         <location line="+33"/>
         <location line="+10"/>
         <source>请先选择公开地址!</source>

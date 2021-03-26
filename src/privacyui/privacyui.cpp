@@ -46,11 +46,10 @@ void PrivacyUi::initUI()
     } else {
         ui->sendwidget1_3->setStyleSheet("QWidget {background-color:#2c2c2c;border-radius: 4px;}");
     }
-    ui->addrEdit->setPlaceholderText(tr("请选择公开地址"));
-    ui->addrEdit->setToolTip(tr("请选择公开地址"));
+    ui->addrEdit->setPlaceholderText(tr("请选择公开地址,并开启隐私功能"));
+    ui->addrEdit->setToolTip(tr("请选择公开地址,并开启隐私功能"));
     ui->addrEdit->setEnabled(false);
     ui->refreshBtn->setStyleSheet("QToolButton {background-color: transparent; }");
-   // ui->copyBtn->setStyleSheet("QToolButton {background-color: transparent; }");
 
 #ifndef MAC_OSX
     ui->labelBalance->setStyleSheet("QLabel { font: " + QString::number(GetBaseFontSize() + 2) + "pt;}");
@@ -66,7 +65,7 @@ void PrivacyUi::initUI()
     ui->addressBookButton->setIcon(m_platformStyle->SingleColorIcon(":/address_book"));
     ui->selectBtn->setIcon(m_platformStyle->SingleColorIcon(":/address_book"));
     ui->copyAddrBtn->setIcon(m_platformStyle->SingleColorIcon(":/copy"));
-    ui->selectBtn->setToolTip(tr("选择公开地址"));
+    ui->selectBtn->setToolTip(tr("选择公开地址,并开启隐私功能"));
     ui->addressFromButton->setToolTip(tr("选择发送方地址"));
     ui->addressBookButton->setToolTip(tr("选择收款方公开地址"));
     ui->copyAddrBtn->setToolTip(tr("复制隐私地址"));
@@ -327,11 +326,9 @@ void PrivacyUi::PostMsgPrivacyListTxs()
     jsonParms.insert("sendRecvFlag", ui->typeWidget->currentData().toInt());     // send or recv flag (0: send, 1: recv)
     jsonParms.insert("direction", m_ndirection);            // query direction (0: pre page, 1: next page), valid with seedtxhash param
     jsonParms.insert("count", COUNT_NUM);                   // number of transactions
-    std::string out;
-    Base64::Encode(m_strFromTx.toStdString(), &out);
-    jsonParms.insert("seedtxhash", out.c_str());
+    jsonParms.insert("startTxHeightIndex", m_strFromTx);
     jsonParms.insert("assetExec", "coins");
-    jsonParms.insert("tokenname", CStyleConfig::GetInstance().GetUnitName());
+    jsonParms.insert("assetSymbol", CStyleConfig::GetInstance().GetUnitName());
     QJsonArray params;
     params.insert(0, jsonParms);
     PostJsonMessage(ID_GetPrivacyTxByAddr, params);

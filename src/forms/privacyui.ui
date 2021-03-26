@@ -1254,6 +1254,9 @@
                </property>
                <item>
                 <widget class="QLabel" name="label_10">
+                 <property name="toolTip">
+                  <string>地址必须已经开启隐私功能,否则会查询不到</string>
+                 </property>
                  <property name="text">
                   <string>交易记录</string>
                  </property>
