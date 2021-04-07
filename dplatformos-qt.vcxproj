@@ -12,7 +12,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{178E876E-52E6-38EA-94BD-59F94A63A69D}</ProjectGuid>
-    <RootNamespace>chain33-qt</RootNamespace>
+    <RootNamespace>dplatformos-qt</RootNamespace>
     <Keyword>QtVS_v303</Keyword>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformMinVersion>10.0.17763.0</WindowsTargetPlatformMinVersion>
@@ -26,7 +26,7 @@
     <CharacterSet>MultiByte</CharacterSet>
     <ConfigurationType>Application</ConfigurationType>
     <IntermediateDirectory>build\</IntermediateDirectory>
-    <PrimaryOutput>chain33-qt</PrimaryOutput>
+    <PrimaryOutput>dplatformos-qt</PrimaryOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <PlatformToolset>v141</PlatformToolset>
@@ -35,7 +35,7 @@
     <CharacterSet>NotSet</CharacterSet>
     <ConfigurationType>Application</ConfigurationType>
     <IntermediateDirectory>build\</IntermediateDirectory>
-    <PrimaryOutput>chain33-qt-Debug</PrimaryOutput>
+    <PrimaryOutput>dplatformos-qt-Debug</PrimaryOutput>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -55,13 +55,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>debug\</OutDir>
     <IntDir>build\</IntDir>
-    <TargetName>chain33-qt-Debug</TargetName>
+    <TargetName>dplatformos-qt-Debug</TargetName>
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>release\</OutDir>
     <IntDir>build\</IntDir>
-    <TargetName>chain33-qt</TargetName>
+    <TargetName>dplatformos-qt</TargetName>
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
     <EmbedManifest>false</EmbedManifest>
@@ -79,7 +79,7 @@
   </ImportGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;/usr/local/include;src;.;src\connector;src\seedUi;src\functionui;src\menu;src\mainui;build;\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;/usr/local/include;src;.;src\connector;src\seedUi;src\functionui;src\menu;src\privacyui;src\mainui;build;\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zc:__cplusplus -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>build\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -106,7 +106,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreImportLibrary>true</IgnoreImportLibrary>
       <LinkIncremental>false</LinkIncremental>
-      <OutputFile>$(OutDir)\chain33-qt.exe</OutputFile>
+      <OutputFile>$(OutDir)\dplatformos-qt.exe</OutputFile>
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
       <SubSystem>Windows</SubSystem>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -167,7 +167,7 @@
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreImportLibrary>true</IgnoreImportLibrary>
-      <OutputFile>$(OutDir)\chain33-qt-Debug.exe</OutputFile>
+      <OutputFile>$(OutDir)\dplatformos-qt-Debug.exe</OutputFile>
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
       <SubSystem>Windows</SubSystem>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -226,7 +226,7 @@
     <ClCompile Include="src\mainui\homepageui.cpp" />
     <ClCompile Include="src\seedUi\inputseedui.cpp" />
     <ClCompile Include="src\menu\introdialog.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mainui\mainui.cpp" />
     <ClCompile Include="src\mainui\manageui.cpp" />
     <ClCompile Include="src\functionui\notificator.cpp" />
@@ -244,9 +244,15 @@
     <ClCompile Include="src\mainui\txviewitemdelegate.cpp" />
     <ClCompile Include="src\menu\veifyseeddialog.cpp" />
     <ClCompile Include="src\mainui\walletsendui.cpp" />
+    <ClCompile Include="src\privacyui\privacyui.cpp" />
+    <ClCompile Include="src\privacyui\sendtocontractdialog.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\menu\aboutdialog.h">
+    </QtMoc>
+	<QtMoc Include="src\privacyui\sendtocontractdialog.h">
+    </QtMoc>
+	<QtMoc Include="src\privacyui\privacyui.h">
     </QtMoc>
     <QtMoc Include="src\mainui\addresslistui.h">
     </QtMoc>
@@ -342,6 +348,10 @@
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="src\forms\aboutdialog.ui">
+    </QtUic>
+    <QtUic Include="src\forms\privacyui.ui">
+    </QtUic>
+    <QtUic Include="src\forms\sendtocontractdialog.ui">
     </QtUic>
     <QtUic Include="src\forms\addresslistui.ui">
     </QtUic>
@@ -507,7 +517,7 @@
     <ResourceCompile Include="src\res\bitcoin-qt.rc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ResourceCompile>
-    <ResourceCompile Include=".\chain33-qt-Debug_resource.rc">
+    <ResourceCompile Include=".\dplatformos-qt-Debug_resource.rc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ResourceCompile>
   </ItemGroup>

@@ -1,6 +1,7 @@
 ﻿#include "sendtocontractdialog.h"
 #include "ui_sendtocontractdialog.h"
 #include "basefuntion.h"
+#include <QDoubleValidator>
 
 QString g_strConvertExectoAddr;     // 隐私合约地址
 
